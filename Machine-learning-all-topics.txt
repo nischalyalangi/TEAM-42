@@ -1,0 +1,525 @@
+(Everything you must know **before** advanced ML, Deep Learning, and MLOps)
+
+
+## 1. Mathematical Foundations (ML-Specific & Exhaustive)
+
+### 1.1 Linear Algebra
+
+* Scalars, vectors, matrices, tensors
+* Matrix operations
+* Matrix transpose, inverse
+* Determinant, rank
+* Column space, null space
+* Eigenvalues & eigenvectors
+* Orthogonal & orthonormal matrices
+* Norms (L0, L1, L2, L∞)
+* Distance metrics
+* Projection matrices
+* Change of basis
+* Positive definite / semi-definite matrices
+* Trace of a matrix
+* Condition number
+* Spectral decomposition (Decomposes a matrix into eigenvalues and eigenvectors, crucial for understanding covariance matrices and PCA.)
+* Singular Value Decomposition (SVD) (A factorisation of any rectangular matrix A into UΣVᵀ, where U and V are orthogonal and Σ contains singular values. Used for general matrix analysis and dimensionality reduction.)
+* Low-rank approximation (Finding a matrix of a lower rank that is closest to the original, typically achieved by truncating the SVD to keep only the largest singular values. This is a form of data compression or noise reduction.)
+* Moore–Penrose pseudoinverse (The generalization of the matrix inverse, computed using SVD, applicable to non-square or singular matrices, and used in least-squares solutions.)
+
+---
+
+### 1.2 Probability Theory
+
+* Probability axioms
+* Random variables (discrete & continuous)
+* Joint, marginal, conditional probability
+* Bayes theorem
+* Independence vs conditional independence
+* Probability mass vs density functions
+* Expectation, variance, covariance
+* Correlation
+* Law of total probability
+* Law of large numbers
+* Central Limit Theorem
+* Entropy
+* Cross-entropy
+* KL-divergence
+* Mutual information
+* Likelihood & log-likelihood
+* Maximum Likelihood Estimation (MLE)
+* Maximum A Posteriori (MAP)
+* Jensen’s inequality
+* Markov property
+
+**Distributions**
+
+* Bernoulli
+* Binomial
+* Multinomial
+* Poisson
+* Uniform
+* Normal (Gaussian)
+* Exponential
+* Gamma
+* Beta
+
+---
+
+### 1.3 Statistics
+
+* Population vs sample
+* Sampling methods
+* Descriptive statistics
+* Mean, median, mode
+* Quartiles, percentiles
+* IQR
+* Skewness & kurtosis
+* Bias vs variance
+* Hypothesis testing
+* Null & alternative hypothesis
+* p-value interpretation
+* Confidence intervals
+* Z-test, T-test
+* Chi-square test
+* ANOVA
+* A/B testing
+* Type I & Type II errors
+* Statistical power
+* Effect size
+* Multiple hypothesis testing
+* Bootstrapping
+* Resampling methods
+* Parametric vs non-parametric tests
+
+---
+
+### 1.4 Calculus & Optimization
+
+* Limits & continuity
+* Differentiation
+* Partial derivatives
+* Chain rule
+* Gradients (A vector of partial derivatives that points in the direction of the steepest ascent of a function, fundamental to all machine learning optimization.)
+* Jacobian & Hessian (The Jacobian is the matrix of all first-order partial derivatives of a vector-valued function. The Hessian is the matrix of all second-order partial derivatives, used to determine if a critical point is a minimum or maximum.)
+* Local vs global minima
+* Convex vs non-convex functions
+* Saddle points
+* Vanishing & exploding gradients
+* Line search
+* Constrained optimization
+* Lagrange multipliers
+* Duality
+
+---
+
+## 2. Programming & Software Foundations
+
+### 2.1 Python Core
+
+* Data types
+* Control flow
+* Functions & lambdas
+* Recursion
+* Exception handling
+* File I/O
+* Object-Oriented Programming
+* Modules & packages
+
+### 2.2 Python for Data Science
+
+* NumPy (vectorization, broadcasting)
+* Pandas (Series, DataFrame)
+* Indexing & slicing
+* Missing value handling
+* Merging & joining
+* GroupBy operations
+* Time-series handling
+
+### 2.3 Performance & Environments
+
+* Virtual environments (venv, conda)
+* Dependency management
+* Memory management
+* Profiling & optimization
+* Multithreading vs multiprocessing
+
+### 2.4 Visualization
+
+* Matplotlib
+* Seaborn
+* Line, bar, histogram
+* Box, violin plots
+* Scatter, heatmaps
+* Interactive visualization concepts
+
+---
+
+## 3. Data Engineering & Data Handling
+
+### 3.1 Data Types
+
+* Structured, unstructured, semi-structured
+
+### 3.2 Data Collection
+
+* APIs
+* Web scraping
+* Databases (SQL & NoSQL)
+* Data pipelines
+* Batch vs streaming data
+
+### 3.3 Data Engineering Concepts
+
+* ETL vs ELT
+* Schema evolution
+* Data versioning
+* Data quality checks
+* Slowly Changing Dimensions (SCD)
+* Feature stores
+* Data labeling strategies
+* Human-in-the-loop systems
+
+---
+
+## 4. Exploratory Data Analysis (EDA)
+
+* Data profiling
+* Summary statistics
+* Distribution analysis
+* Outlier detection
+* Correlation & causation
+* Feature relationships
+* Data leakage detection
+* Time-based leakage
+
+---
+
+## 5. Data Cleaning & Feature Engineering
+
+### 5.1 Data Cleaning
+
+* Missing data types
+* Imputation strategies
+* Duplicate handling
+* Noise reduction
+* Inconsistent data handling
+* Categorical encoding
+* Text normalization
+
+### 5.2 Feature Engineering
+
+* Feature scaling
+* Normalization & standardization
+* Log & power transforms
+* Polynomial features
+* Binning
+* Interaction features
+* Date-time features
+* Text features (TF-IDF, n-grams)
+* Image features
+* Target encoding
+* Mean encoding leakage risks
+* Feature hashing
+* Embeddings
+* Curse of dimensionality
+* Feature drift
+
+---
+
+## 6. Core Machine Learning Theory
+
+### 6.1 Learning Paradigms
+
+* Supervised learning
+* Unsupervised learning
+* Semi-supervised learning
+* Self-supervised learning
+* Reinforcement learning
+
+### 6.2 Learning Theory
+
+* Empirical Risk Minimization (ERM)
+* Structural Risk Minimization (SRM)
+* Bias-variance decomposition (Decomposes the expected test error into the sum of bias (underfitting), variance (overfitting), and irreducible noise. It is the central trade-off in model complexity.)
+* No Free Lunch theorem
+* Generalization
+* Overfitting theory
+* VC dimension (Vapnik–Chervonenkis dimension: A measure of the capacity or complexity of a function class, used to set generalization bounds.)
+* PAC learning (Probably Approximately Correct: A framework defining the mathematical conditions under which a learner can successfully generalize from a sample to an entire data distribution.)
+
+---
+
+## 7. Supervised Learning Algorithms
+
+### 7.1 Regression
+
+* Linear regression
+* Polynomial regression
+* Ridge, Lasso, Elastic Net
+* Bayesian regression
+
+### 7.2 Classification
+
+* Logistic regression
+* k-Nearest Neighbors
+* Naive Bayes
+* Decision trees
+* Random Forest
+* Gradient Boosting
+* XGBoost, LightGBM, CatBoost
+* Support Vector Machines
+* Perceptron
+* Passive-Aggressive algorithms
+* LDA & QDA
+
+---
+
+## 8. Unsupervised Learning
+
+* K-Means
+* Hierarchical clustering
+* DBSCAN
+* OPTICS
+* Gaussian Mixture Models
+* PCA
+* ICA
+* t-SNE
+* UMAP
+* Spectral clustering
+* Association rules (Apriori, FP-Growth)
+* Anomaly detection:
+
+  * Isolation Forest
+  * One-Class SVM
+  * Local Outlier Factor
+
+---
+
+## 9. Optimization & Training (Deep Dive)
+
+### 9.1 Optimization Algorithms
+
+* Gradient Descent theory
+* Batch, Mini-batch, Stochastic GD
+* Momentum (Uses a fraction of the previous update vector to speed up convergence, especially along shallow gradients, while dampening oscillations.)
+* Nesterov Accelerated Gradient (NAG) (A lookahead version of Momentum that computes the gradient at an anticipated future position, leading to faster and more stable convergence.)
+* AdaGrad
+* RMSProp
+* Adam, AdamW (Adam combines Momentum and RMSProp. It computes individual adaptive learning rates for different parameters based on the first (mean) and second (variance) moments of the gradients. AdamW is a corrected version that properly handles weight decay.)
+* Learning-rate scheduling
+* Warm-up strategies
+
+### 9.2 Optimization Theory
+
+* Loss landscapes
+* Saddle points vs minima
+* Flat vs sharp minima
+* Second-order methods
+* Newton & Quasi-Newton methods
+* Hessian-based intuition
+* Ill-conditioned optimization
+* Regularization as optimization
+
+---
+
+## 10. Model Evaluation & Validation (Exhaustive)
+
+### 10.1 Validation Strategies
+
+* Train / validation / test split
+* k-Fold cross-validation
+* Stratified k-Fold
+* Group k-Fold
+* Nested cross-validation
+* Time-series validation (walk-forward)
+
+### 10.2 Metrics & Analysis
+
+* Regression metrics (MSE, RMSE, MAE, R²)
+* Classification metrics (Accuracy, Precision, Recall, F1)
+* ROC-AUC
+* Precision-Recall curve
+* Confusion matrix
+* Threshold tuning
+* Calibration (Platt scaling, isotonic regression)
+* Cost-sensitive learning
+* Business vs ML metrics
+* Statistical significance testing
+* Confidence estimation
+
+---
+
+## 11. Deep Learning (Complete Coverage)
+
+### 11.1 Neural Network Fundamentals
+
+* Perceptron
+* Feed-forward networks
+* Activation functions
+* Loss functions
+* Backpropagation
+* Computational graphs
+
+### 11.2 Training Techniques
+
+* Weight initialization strategies
+* Batch Normalization (BN) (Normalizes the output of an activation layer by adjusting and scaling the activations using the batch mean and variance, improving training stability and convergence speed.)
+* Layer Normalization (LN) (Normalizes the inputs across the features (hidden size) within a single training sample, instead of across the batch. Commonly used in recurrent networks and Transformers.)
+* Dropout
+* Regularization in DL
+* Residual connections
+* Gradient clipping
+
+### 11.3 Architectures
+
+* Convolutional Neural Networks (CNNs)
+* Pooling operations
+* Recurrent Neural Networks (RNNs)
+* LSTM & GRU
+* Attention mechanism (math intuition)
+* Transformers
+* Positional encoding
+* Encoder-decoder models
+
+### 11.4 Advanced DL Concepts
+
+* Transfer learning
+* Fine-tuning strategies
+* Pretraining vs finetuning
+* Overparameterization
+* Loss surface intuition
+* Scaling laws
+
+---
+
+## 12. Specialized ML Domains
+
+* Natural Language Processing (NLP)
+* Computer Vision (CV)
+* Time-series forecasting
+* Recommendation systems
+* Anomaly detection
+* Graph Machine Learning
+* Reinforcement Learning basics
+
+---
+
+## 13. Deployment Engineering
+
+### 13.1 Model Deployment
+
+* Model serialization
+* Offline vs online inference
+* REST APIs
+* Flask / FastAPI
+* Batch inference
+* Real-time inference
+
+### 13.2 Production Concerns
+
+* Latency vs throughput
+* Scalability
+* Load balancing
+* Caching
+* Rollbacks
+* Canary deployment
+* Shadow deployment
+* A/B model testing
+
+---
+
+## 14. MLOps (Full Lifecycle)
+
+### 14.1 Experimentation
+
+* Experiment tracking theory
+* Reproducibility
+* Random seeds
+
+### 14.2 Versioning
+
+* Data versioning
+* Model versioning
+* Feature versioning
+* Model registries
+
+### 14.3 Monitoring
+
+* Data drift
+* Concept drift
+* Prediction drift
+* Performance degradation
+* Alerting systems
+
+### 14.4 Retraining
+
+* Retraining triggers
+* Automated pipelines
+* Human approval loops
+
+---
+
+## 15. Governance, Ethics & Reliability
+
+* Explainable AI (SHAP, LIME)
+* Fairness & bias detection
+* Ethical AI principles
+* Model governance
+* Compliance basics (GDPR)
+* Security considerations
+* Failure analysis
+* Post-mortems
+* Technical debt in ML
+* Model decay
+
+---
+
+## 16. Tools & Platforms
+
+* Scikit-learn
+* TensorFlow
+* PyTorch
+* Spark / PySpark
+* MLflow
+* DVC
+* Airflow
+* Kubernetes
+* Feature stores (Feast)
+* Monitoring tools (Evidently, Prometheus)
+
+---
+
+## 17. Research, Theory & Future Trends
+
+* Bias-variance tradeoff (formal)
+* VC dimension intuition
+* PAC learning theory
+* Generalization bounds
+* Curse of dimensionality
+* AutoML
+* Federated learning
+* Edge ML
+* Responsible AI
+* Foundation models
+
+---
+
+## 18. Real-World ML Project Lifecycle (Reality-Aware)
+
+* Problem framing mistakes
+* Stakeholder alignment
+* Data availability risks
+* Baseline models
+* Iterative improvement
+* Failure cases
+* Post-deployment monitoring
+* Model retirement
+
+---
+
+## 19. ML Career Readiness
+
+* ML Engineer vs Data Scientist vs Researcher
+* Interview-level ML theory
+* System design for ML
+* Portfolio-ready projects
+* Reading ML papers
+* Continuous learning strategies

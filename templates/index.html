@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaptive ML Tutor RAG</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; background-color: #f7f7f7; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        form { background: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #34495e; }
+        input[type="text"], input[type="number"], textarea { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { background-color: #3498db; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; }
+        button:hover { background-color: #2980b9; }
+        #output { margin-top: 20px; padding: 15px; border: 1px solid #bdc3c7; border-radius: 4px; background-color: #ecf0f1; white-space: pre-wrap; }
+        #loading { display: none; color: #e67e22; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Adaptive ML Tutor</h1>
+    <p>Ask a Machine Learning question and set your current knowledge level (0-100).</p>
+    
+    <form id="rag-form">
+        <label for="query">Question:</label>
+        <textarea id="query" rows="4" placeholder="e.g., Explain the Bias-Variance Tradeoff in simple terms." required></textarea>
+
+        <label for="score">Current Knowledge Score (0-100):</label>
+        <input type="number" id="score" min="0" max="100" value="30" required>
+        
+        <label for="chunks">Number of Chunks (k_chunks):</label>
+        <input type="number" id="chunks" min="1" max="10" value="4" required>
+        
+        <button type="submit">Get Adaptive Answer</button>
+    </form>
+
+    <div id="loading">... Thinking  ...</div>
+
+    <div id="output">
+        </div>
+
+    <script>
+        document.getElementById('rag-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const query = document.getElementById('query').value;
+            const knowledge_score = parseInt(document.getElementById('score').value);
+            const k_chunks = parseInt(document.getElementById('chunks').value);
+            const outputDiv = document.getElementById('output');
+            const loadingDiv = document.getElementById('loading');
+            
+            outputDiv.innerHTML = '';
+            loadingDiv.style.display = 'block';
+
+            try {
+                const response = await fetch('/ask', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        query: query,
+                        knowledge_score: knowledge_score,
+                        k_chunks: k_chunks
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Convert newlines in the response for HTML display
+                    const htmlAnswer = data.answer.replace(/\n/g, '<br>');
+                    outputDiv.innerHTML = `
+                        <h2>Adaptive Answer:</h2>
+                        <div style="border: 1px dashed #3498db; padding: 15px; background: #fff;">${htmlAnswer}</div>
+                        <p style="font-size: 0.9em; margin-top: 10px;">
+                            <span style="color: #27ae60;">Chunks Retrieved: ${data.retrieved_chunks_count}</span> | 
+                            <span style="color: #e67e22;">Retrieval Time: ${data.retrieval_time_ms.toFixed(2)}ms</span>
+                        </p>
+                    `;
+                } else {
+                    outputDiv.innerHTML = `<h2>Error:</h2><p style="color: red;">${data.detail || 'Failed to fetch response.'}</p>`;
+                }
+            } catch (error) {
+                outputDiv.innerHTML = `<h2>Network Error:</h2><p style="color: red;">Could not connect to the API. Ensure the server is running.</p>`;
+            } finally {
+                loadingDiv.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

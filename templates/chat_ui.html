@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaptive ML Tutor</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #9ca3af; /* gray-400 */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f3f4f6; /* gray-100 */
+        }
+        /* Style for pre-formatted code blocks from LLM responses */
+        #chat-window pre {
+            background-color: #1f2937; /* gray-800 */
+            color: #f3f4f6; /* gray-100 */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin-top: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-family: monospace;
+        }
+        /* Style for LaTeX/MathJax display, making it clear */
+        .math-display {
+            font-style: italic;
+            color: #10b981; /* emerald-500 */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen flex flex-col items-center justify-center font-sans">
+
+    <!-- Main Chat Container -->
+    <div class="flex flex-col w-full max-w-4xl h-full md:h-[90vh] bg-white shadow-xl rounded-xl overflow-hidden">
+        
+        <!-- Header -->
+        <header class="bg-emerald-600 p-4 text-white shadow-md flex items-center justify-between">
+            <h1 class="text-xl font-bold">🧠 Adaptive ML Tutor</h1>
+            <span id="loading-indicator" class="hidden bg-yellow-400 text-gray-900 text-xs font-semibold px-2 py-1 rounded-full animate-pulse">
+                Thinking...
+            </span>
+        </header>
+
+        <!-- Chat Window -->
+        <main id="chat-window" class="flex-grow p-4 overflow-y-auto space-y-4 bg-gray-50">
+            <!-- Initial Message -->
+            <div class="flex justify-start">
+                <div class="bg-emerald-100 p-3 rounded-xl shadow-md max-w-3xl text-gray-800">
+                    <p class="font-bold text-emerald-700">Tutor:</p>
+                    <p>Welcome! I'm loading the curriculum now...</p>
+                    <p id="initial-load-message" class="text-sm italic text-gray-500 mt-1">
+                        Please wait for the server to initialize the RAG model...
+                    </p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Input Area -->
+        <footer class="p-4 bg-gray-200 border-t border-gray-300">
+            <div class="flex items-end space-x-2">
+                <textarea 
+                    id="user-input" 
+                    class="flex-grow p-3 border border-gray-400 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm h-12"
+                    placeholder="Ask a question or provide your answer... (Enter to Send / Shift+Enter or Ctrl+Enter for New Line)"
+                    rows="1"
+                    oninput="autoResizeTextarea()"
+                    onkeydown="handleInputKeydown(event)"
+                ></textarea>
+                <button 
+                    id="send-button"
+                    onclick="sendMessage()" 
+                    class="bg-emerald-600 text-white p-3 rounded-lg hover:bg-emerald-700 transition duration-150 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    disabled
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                    </svg>
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        const chatWindow = document.getElementById('chat-window');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const apiUrl = "/ask"; 
+        let isProcessing = false;
+
+        // Function to create and display a chat message
+        function displayMessage(sender, text, isError = false) {
+            const messageContainer = document.createElement('div');
+            messageContainer.className = `flex ${sender === 'User' ? 'justify-end' : 'justify-start'}`;
+
+            const messageBubble = document.createElement('div');
+            let bgColor, textColor, senderName;
+
+            if (sender === 'User') {
+                bgColor = 'bg-blue-500';
+                textColor = 'text-white';
+                senderName = 'You';
+            } else if (isError) {
+                bgColor = 'bg-red-100';
+                textColor = 'text-red-800';
+                senderName = 'System Error';
+            } else {
+                bgColor = 'bg-emerald-100';
+                textColor = 'text-gray-800';
+                senderName = 'Tutor';
+            }
+
+            messageBubble.className = `${bgColor} ${textColor} p-3 rounded-xl shadow-md max-w-3xl`;
+            
+            // Format the message content
+            const formattedText = formatMarkdown(text);
+            
+            messageBubble.innerHTML = `<p class="font-bold ${sender === 'User' ? 'text-white' : 'text-emerald-700'}">${senderName}:</p>${formattedText}`;
+            
+            messageContainer.appendChild(messageBubble);
+            chatWindow.appendChild(messageContainer);
+            
+            // Scroll to the bottom
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+        
+        // Simple Markdown/LaTeX formatting (for display purposes)
+        function formatMarkdown(text) {
+            let html = text;
+
+            // 1. Convert newlines to breaks
+            html = html.replace(/\n/g, '<br>');
+
+            // 2. Strong emphasis: **text** or __text__ to bold
+            html = html.replace(/\*\*(.*?)\*\*|__(.*?)__/g, (match, p1, p2) => 
+                `<strong class="font-extrabold">${p1 || p2}</strong>`
+            );
+
+            // 3. Emphasis: *text* or _text_ to italic
+            html = html.replace(/\*(.*?)\*|_(.*?)_/g, (match, p1, p2) => 
+                `<em>${p1 || p2}</em>`
+            );
+
+            // 4. Code blocks: ```language\ncode\n``` to <pre>
+            // Note: This relies on the LLM sending back correct markdown for code blocks
+            html = html.replace(/```(.*?)<br>(.*?)```/gs, (match, lang, code) => {
+                // Remove <br> tags within the pre block and replace with actual newlines for code readability
+                const cleanCode = code.replace(/<br>/g, '\n');
+                return `<pre><code>${cleanCode}</code></pre>`;
+            });
+
+            // 5. Lists (simple approximation for standard LLM lists)
+            html = html.replace(/<br>\* /g, '<br>&bull; ');
+            html = html.replace(/<br>[0-9]+\. /g, '<br>&#x25cf; ');
+
+
+            return html;
+        }
+
+        // Function to resize the textarea dynamically
+        function autoResizeTextarea() {
+            userInput.style.height = 'auto';
+            userInput.style.height = (userInput.scrollHeight) + 'px';
+        }
+
+        // Keydown Handler to control form submission vs. new line
+        function handleInputKeydown(event) {
+            // Check if Enter key is pressed
+            if (event.key === 'Enter') {
+                // If Shift or Ctrl are NOT pressed, submit the message
+                if (!event.shiftKey && !event.ctrlKey) {
+                    event.preventDefault(); // Prevent default newline insertion
+                    sendMessage();
+                } 
+                // If Shift or Ctrl IS pressed, allow the default (newline)
+            }
+        }
+
+        // Core Send Message function
+        async function sendMessage() {
+            if (isProcessing) return;
+
+            const query = userInput.value.trim();
+            if (!query) return;
+
+            // 1. Display User Message
+            displayMessage('User', query);
+            
+            // 2. Clear input and reset height
+            userInput.value = '';
+            autoResizeTextarea();
+            
+            // 3. Disable input and show loading
+            isProcessing = true;
+            userInput.disabled = true;
+            sendButton.disabled = true;
+            loadingIndicator.classList.remove('hidden');
+
+            // 4. Send API Request
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query: query })
+                });
+
+                if (!response.ok) {
+                    const errorBody = await response.json();
+                    throw new Error(`API Error ${response.status}: ${errorBody.detail || 'Unknown error'}`);
+                }
+
+                const data = await response.json();
+                
+                // 5. Display Tutor Response
+                displayMessage('Tutor', data.answer);
+
+            } catch (error) {
+                console.error("Error sending message:", error);
+                displayMessage('System', `Failed to get a response. Please check the server logs for details. Error: ${error.message}`, true);
+            } finally {
+                // 6. Re-enable input and hide loading
+                isProcessing = false;
+                userInput.disabled = false;
+                sendButton.disabled = false;
+                loadingIndicator.classList.add('hidden');
+                userInput.focus();
+            }
+        }
+
+        // --- Initialization ---
+
+        // Function called on successful RAG initialization (simulated here)
+        function onRAGReady() {
+            document.getElementById('initial-load-message').remove();
+            
+            // Trigger the initial assessment message from the server
+            // We simulate the first user input to kick off the dialogue flow
+            setTimeout(() => {
+                 userInput.value = "Start learning";
+                 sendMessage();
+            }, 500); 
+
+            // Enable input area after the initial message is sent
+            setTimeout(() => {
+                userInput.disabled = false;
+                sendButton.disabled = false;
+                userInput.focus();
+            }, 1000); 
+        }
+
+        // We can't actually check the FastAPI startup event from here, 
+        // so we'll wait a few seconds and then call the ready function,
+        // unless a server check mechanism is implemented (which is too complex for this context).
+        setTimeout(onRAGReady, 3000); // Wait 3 seconds for server startup (approx)
+    </script>
+</body>
+</html>
