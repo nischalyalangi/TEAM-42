@@ -1,4 +1,12 @@
+import backend_controller
 from backend_controller import tutor_step
+
+# Inject default profile to skip assessment (Quick Start)
+backend_controller.USER_PROFILE = {
+    "persona": "beginner",
+    "intent": "Learn ML from scratch", 
+    "score": 0.0
+}
 
 # First explanation
 response = tutor_step()

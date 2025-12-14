@@ -105,22 +105,32 @@ def tutor_step(user_answer=None):
     # --------------------------------------------------------------
     # EXPLANATION (GEMINI)
     # --------------------------------------------------------------
-    explanation = explain_chunk(
-    chunk=chunk,
-    persona=USER_PROFILE["persona"],
-    intent=USER_PROFILE["intent"],
-    mastery_level=tier
-)
-
+    # --------------------------------------------------------------
+    # EXPLANATION (GEMINI)
+    # --------------------------------------------------------------
+    ai_response = explain_chunk(
+        chunk=chunk,
+        persona=USER_PROFILE["persona"],
+        intent=USER_PROFILE["intent"],
+        mastery_level=tier
+    )
+    
+    explanation = ai_response["explanation"]
+    ai_question = ai_response["question"]
 
     # --------------------------------------------------------------
     # SAFE QUESTION EXTRACTION
     # --------------------------------------------------------------
-    assessment_prompt = chunk["assessment"]
-    if isinstance(assessment_prompt, dict):
-        question = assessment_prompt.get("question", "Explain the concept.")
+    # Prioritize AI question if available
+    if ai_question:
+        question = ai_question
     else:
-        question = assessment_prompt
+        # Fallback to static assessment
+        assessment_prompt = chunk["assessment"]
+        if isinstance(assessment_prompt, dict):
+            question = assessment_prompt.get("question", "Explain the concept.")
+        else:
+            question = assessment_prompt
 
     return {
         "topic": chunk["topic"],

@@ -85,4 +85,28 @@ def explain_chunk(chunk, persona, intent, mastery_level):
     )
 
     response = model.generate_content(prompt)
-    return response.text.strip()
+    raw_text = response.text.strip()
+
+    # Simple parsing logic
+    explanation_marker = "EXPLANATION:"
+    question_marker = "CHECKPOINT QUESTION:"
+
+    explanation = raw_text
+    question = None
+
+    if explanation_marker in raw_text and question_marker in raw_text:
+        try:
+            parts = raw_text.split(question_marker)
+            explanation_part = parts[0].replace(explanation_marker, "").strip()
+            question_part = parts[1].strip()
+            
+            explanation = explanation_part
+            question = question_part
+        except Exception:
+            # Fallback if split fails unexpectedly
+            pass
+            
+    return {
+        "explanation": explanation,
+        "question": question
+    }
