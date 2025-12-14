@@ -1,59 +1,177 @@
-# Adaptive Machine Learning Tutor (ML-Tutor)
+# 🎓 Adaptive Machine Learning Tutor (ML-Tutor)
 
-## 1. Problem Statement
+An intelligent, adaptive machine learning tutor that personalizes explanations based on your knowledge level, learning style, and preferred topics. Built with AI-powered content generation and a beautiful modern web interface.
 
-The current landscape of online machine learning education is largely static, offering the same fixed curriculum regardless of the learner's existing knowledge, coding proficiency, or problem-solving capability. This leads to inefficient learning pathways, where advanced learners are bored by foundational material, and beginners are quickly overwhelmed by complex concepts.
+![Status](https://img.shields.io/badge/status-active-success.svg)
+![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
 
-The core problem this project addresses is the need for **personalized, adaptive instruction** in Machine Learning. Our goal is to create an AI-powered tutor that:
+## ✨ Features
 
-1.  **Accurately Assesses** a user's current knowledge and skills across multiple dimensions (knowledge, coding, problem-solving, deployment, etc.), scoring them out of 100.
-2.  **Adaptively Explains** complex ML topics using a tone and depth (foundational, competent, expert) dynamically determined by the user's score profile.
-3.  **Intelligently Assesses** mastery by asking targeted questions, checking the user's understanding of prerequisites, and moving them through the curriculum only when true mastery is demonstrated.
+- **🎯 Adaptive Learning**: Personalized explanations based on your skill level (Beginner, Theory-Aware, Practitioner, Advanced)
+- **🧠 AI-Powered**: Uses Google's Gemini AI to generate contextual explanations and checkpoint questions
+- **📊 Smart Profiling**: 5-question assessment to accurately determine your learning persona
+- **🎨 Beautiful UI**: Modern dark-themed interface with glassmorphism effects
+- **📈 Progress Tracking**: Real-time score tracking and adaptive difficulty adjustment
+- **🔄 Re-explain Logic**: Automatically re-explains concepts if you struggle, advances when you succeed
+- **🎯 Topic Selection**: Choose what you're most excited to learn about
 
-## 2. Data Link (Curriculum Source)
+## 🚀 Quick Start
 
-The entire curriculum structure and educational content are derived from a single, exhaustive source, which serves as the project's **Expert Model**.
+### Prerequisites
+- Python 3.11 or higher
+- Google Gemini API Key ([Get one here](https://makersuite.google.com/app/apikey))
 
-- **Source File:** `Machine-learning-all-topics.txt`
-- [cite_start]**Content:** This file contains a comprehensive, end-to-end Machine Learning roadmap, covering everything from core mathematical foundations (Linear Algebra, Probability, Calculus) [cite: 1] [cite_start]and Python programming [cite: 3] [cite_start]to core algorithms (Supervised [cite: 6][cite_start], Unsupervised [cite: 6][cite_start]), Deep Learning [cite: 16][cite_start], Model Evaluation [cite: 15][cite_start], Deployment, and MLOps[cite: 17].
-- **Role:** This structured content is ingested into the Vector Database to provide the Retrieval-Augmented Generation (RAG) system with a factual and domain-specific knowledge base for generating explanations.
+### Installation
 
-## 3. System Design and Architecture
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/nischalyalangi/TEAM-42.git
+   cd TEAM-42
+   ```
 
-The ML-Tutor is structured around a three-tier model, leveraging modern LLM and data engineering techniques.
+2. **Install dependencies**
+   ```bash
+   pip install fastapi uvicorn google-generativeai
+   ```
 
-### Core Adaptive Architecture
+3. **Configure API Key**
+   ```bash
+   # Windows (PowerShell)
+   $env:GEMINI_API_KEY="your-api-key-here"
+   
+   # Linux/Mac
+   export GEMINI_API_KEY="your-api-key-here"
+   ```
 
-1.  **Expert Model:** The structured curriculum (from `Machine-learning-all-topics.txt`), mapping topics and their prerequisites. Stored in PostgreSQL.
-2.  **Learner Model:** A relational database storing the user's dynamic profile, including all assessed scores (knowledge, coding, problem-solving, etc.), current topic, and historical performance. Stored in PostgreSQL.
-3.  **Tutor Logic (Orchestrator):** The application layer that dictates the flow:
-    - **Assessment:** If a user's score is below a threshold (e.g., <40%), trigger a clear, foundational explanation. If the score is high (e.g., >80%), trigger a deep, complex question.
-    - **Generation:** Uses the user's profile to inject specific style and difficulty instructions into the LLM prompt.
+4. **Run the application**
+   ```bash
+   python -m uvicorn api:app --reload --port 8000
+   ```
 
-### Tech Stack
+5. **Open browser** → `http://localhost:8000`
 
-| Component             | Technology                            | Rationale                                                                                                                                       |
-| :-------------------- | :------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Core Framework**    | Python (FastAPI)                      | High-performance, asynchronous backend for handling API requests and business logic.                                                            |
-| **AI Core**           | LLM (e.g., Gemini, GPT, Llama)        | Handles conversational intelligence, content generation, and question creation.                                                                 |
-| **RAG Orchestration** | LangChain / LlamaIndex                | Manages the complex Retrieval-Augmented Generation pipeline.                                                                                    |
-| **Knowledge Storage** | Vector Database (FAISS for prototype) | Stores semantic embeddings of the curriculum for fast, context-aware retrieval.                                                                 |
-| **Data Storage**      | PostgreSQL                            | Robust relational database for managing the structured Expert Model (topic hierarchy) and the dynamic Learner Model (user profiles and scores). |
-| **RAG Quality**       | Re-ranking Model (e.g., Cohere)       | Used to improve retrieval accuracy by filtering the most relevant chunks before generation.                                                     |
+## 🏗️ Tech Stack
 
-## 4. Key Assumptions and Design Decisions
+### Backend
+- **FastAPI** - Modern, fast web framework for building APIs
+- **Python 3.11+** - Core programming language
+- **Google Gemini AI** - AI model for generating explanations and questions
+- **Pydantic** - Data validation using Python type annotations
 
-### A. Foundational Assumptions
+### Frontend
+- **HTML5** - Structure and semantic markup
+- **CSS3** - Modern styling with CSS variables, glassmorphism, gradients
+- **Vanilla JavaScript** - Client-side logic and API communication
+- **Marked.js** - Markdown parsing for rich text rendering
+- **Google Fonts (Outfit)** - Typography
 
-- **Curriculum Completeness:** We assume the content provided in `Machine-learning-all-topics.txt` is the definitive and exhaustive knowledge base for the project. The bot will not teach concepts outside of this file.
-- **LLM Reliability:** We assume the chosen LLM can reliably follow complex, multi-part prompt instructions for adapting explanation style and generating questions with consistent difficulty.
-- **Initial Self-Assessment:** The learning process starts by trusting the user's initial self-assessment of the topic they know up to (e.g., "I know until Classification"). This sets the first testing milestone.
+### Architecture
+- **RESTful API** - Clean API design with `/api/tutor` and `/api/reset` endpoints
+- **Stateful Backend** - In-memory session management
+- **Modular Design** - Separated concerns (assessment, profiling, evaluation, AI generation)
 
-### B. Adaptive Logic Design Decisions
+## 📁 Project Structure
 
-- **Multi-Dimensional Scoring:** User assessment is scaled out of 100 for multiple traits (knowledge, coding, problem-solving, deployment) to create a nuanced profile, rather than a single knowledge metric.
-- **Grading Tiers for Adaptation:** The system uses three primary score thresholds to define the adaptive style:
-  - **Below 40% (Foundational):** Explain concepts very clearly, using simple language. Ask easy, definitional questions.
-  - **40% - 80% (Competent):** Explain concisely, filling gaps. Ask medium-difficulty application or comparison questions.
-  - **Above 80% (Mastery):** Explain short, technical details. Ask deep, complex, or system-design questions.
-- **Prerequisite Check:** Upon a user stating their current knowledge, the system _assumes_ they know all prerequisites and immediately jumps to testing the stated topic (e.g., if a user knows Classification, the first test is on Classification, not Linear Regression). The user is prompted to ask for a review if needed.
+```
+TEAM-42/
+├── api.py                      # FastAPI application and routes
+├── backend_controller.py       # Main tutor logic and state management
+├── expert_knowledge.json       # ML curriculum knowledge base
+├── member3/
+│   ├── initial_assessment.py  # 5-question profiling system
+│   ├── profile_rules.py       # Rule-based persona inference
+│   ├── ai_evaluator.py        # Answer evaluation using Gemini
+│   └── score_update.py        # Adaptive scoring algorithm
+├── member4/
+│   └── gemini_explainer.py    # AI explanation generation
+└── ui/
+    ├── index.html             # Main web interface
+    ├── style.css              # Modern dark theme styling
+    └── script.js              # Client-side logic
+```
+
+## 🎮 How It Works
+
+### 1. Initial Assessment
+Answer 5 questions:
+- Self-reported experience level
+- Concept check (supervised learning)
+- Math comfort level
+- Practical experience
+- Learning intent
+
+### 2. Persona Inference
+System assigns you one of these personas:
+- **Beginner**: Intuition-first, no equations
+- **Theory-Aware**: Concepts + light math
+- **Practitioner**: Code examples, metrics, trade-offs
+- **Advanced**: Proofs, edge cases, research insights
+- **Domain User**: Outcomes, interpretation, risks
+
+### 3. Topic Selection
+Choose which ML topic you're most excited about (Linear Algebra, Optimization, Neural Networks, etc.)
+
+### 4. Adaptive Learning Loop
+1. AI explains the concept at your level
+2. Checkpoint question tests understanding
+3. Your answer is evaluated
+4. Score updates (0.0 - 1.0 scale)
+5. If score < 0.4: Re-explain the same topic
+6. If score ≥ 0.75: Advance to next topic
+
+## 📊 API Endpoints
+
+### `POST /api/tutor`
+Main tutoring endpoint.
+
+**Request:**
+```json
+{
+  "answer": "string or null"
+}
+```
+
+**Response:**
+```json
+{
+  "question": "What is a vector?",
+  "options": ["...", "..."],
+  "explanation": "Markdown formatted explanation",
+  "persona": "beginner",
+  "intent": "Learning from scratch",
+  "score": 0.35,
+  "topic": "Linear Algebra",
+  "subtopic": "Vectors and Matrices"
+}
+```
+
+### `POST /api/reset`
+Resets the session (clears profile and scores).
+
+## 🎨 UI Features
+
+- **Dark Mode**: Deep blue/purple gradients
+- **Glassmorphism**: Modern frosted glass effects
+- **Responsive Design**: Works on desktop and mobile
+- **Real-time Updates**: Persona and score displayed in sidebar
+- **Markdown Support**: Rich formatting in AI responses
+- **Smooth Animations**: Polished user experience
+
+## 🔧 Configuration
+
+### Knowledge Base
+Edit `expert_knowledge.json` to add or modify topics.
+
+### Persona Rules
+Modify `member3/profile_rules.py` to adjust persona inference logic.
+
+### AI Prompt
+Customize the teaching style in `member4/gemini_explainer.py`.
+
+## 👥 Team
+
+**TEAM-42** - Adaptive ML Tutor Development Team
+
+---
+
+**Made with ❤️ for adaptive learning**

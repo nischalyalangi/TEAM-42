@@ -60,9 +60,10 @@ def get_chunk_by_subtopic(subtopic):
 # ------------------------------------------------------------------
 # Store temporary answers during onboarding
 ONBOARDING_ANSWERS = {}
+TOPIC_SELECTED = False
 
 def run_initial_assessment(user_answer=None):
-    global USER_PROFILE, ONBOARDING_ANSWERS
+    global USER_PROFILE, ONBOARDING_ANSWERS, TOPIC_SELECTED, LEARNER_SCORES
 
     # If profile exists, we are done
     if USER_PROFILE is not None:
@@ -98,10 +99,44 @@ def run_initial_assessment(user_answer=None):
         }
     else:
         # Assessment complete!
-        print("\n=== Initial ML Assessment Complete ===")
-        USER_PROFILE = infer_user_profile(ONBOARDING_ANSWERS)
-        print("\nUser Profile Locked:")
-        print(USER_PROFILE)
+        if USER_PROFILE is None:
+            print("\n=== Initial ML Assessment Complete ===")
+            USER_PROFILE = infer_user_profile(ONBOARDING_ANSWERS)
+            print("\nUser Profile Locked:")
+            print(USER_PROFILE)
+        
+        # --------------------------------------------------------------
+        # TOPIC SELECTION (NEW STEP)
+        # --------------------------------------------------------------
+        # If we just finished assessment or came back with profile but no topic selected
+        if not TOPIC_SELECTED:
+            # Check if user provided a topic choice
+            # We assume user_answer is the choice if we are in this state
+            # But wait, if we just created the profile, we haven't asked the question yet?
+            # actually, if we just came from `next_q` being None, we just finished Q5.
+            # We should immediately return the Topic Question.
+            
+            # Get available topics
+            expert_topics = [k["subtopic"] for k in KNOWLEDGE]
+            
+            # Check if user_answer matches a topic (Validation)
+            if user_answer and any(topic.lower() in user_answer.lower() for topic in expert_topics):
+                 # Exact or fuzzy match logic
+                 selected = next(t for t in expert_topics if t.lower() in user_answer.lower())
+                 print(f"User selected topic: {selected}")
+                 
+                 # Prioritize this topic: Set score to 0.0 (weakest) so get_weakest_topic picks it
+                 LEARNER_SCORES[selected] = 0.0
+                 TOPIC_SELECTED = True
+                 return None # Proceed to Explanation
+            
+            # If no valid answer yet, ask the question
+            return {
+                "type": "assessment", # Keep type assessment to use same UI flow
+                "question": f"Assessment complete! You are identified as a {USER_PROFILE['persona']}. What topic are you most excited about?",
+                "options": expert_topics
+            }
+            
         return None
 
 # ------------------------------------------------------------------
@@ -133,73 +168,51 @@ def tutor_step(user_answer=None):
         }
 
     # 2. Normal Tutor Flow (Profile is locked)
+    
+    # Check if answer is a topic selection (heuristic to skip evaluation)
+    expert_topics = [k["subtopic"] for k in KNOWLEDGE]
+    is_topic_selection = user_answer and any(t.lower() == user_answer.lower() for t in expert_topics)
 
-    # If user_answer was provided but consumed by onboarding, it's already handled.
-    # If user_answer was provided AFTER onboarding (for a concept), it's for evaluation.
-    # Need to distinguish? 
-    # Simple logic: If we just finished onboarding (USER_PROFILE just created), 
-    # we don't treat the *last* onboarding answer as a concept answer.
-    # The `run_initial_assessment` returns None exactly when it creates the profile.
-    # But `user_answer` passed to it was used for the LAST question.
-    # So we should clear `user_answer` if we just finished onboarding?
-    # Actually, `tutor_step` assumes `user_answer` is for the *previous* turn.
-    # If we just finished onboarding, the next thing is to explain the first topic. 
-    # So we ignore `user_answer` for evaluation this turn.
-    
-    # We can detect if we *just* finished?
-    # Or simpler: The user answer for the last assessment question triggered profile creation.
-    # We should return the first explanation now. 
-    # We should NOT use that answer for evaluation of the *concept*.
-    
+    # If we just selected a topic, do NOT evaluate the answer as a concept answer
+    if is_topic_selection:
+        user_answer = None # Clear it so we trigger explanation only
+
     # Select weakest topic
     weak_topic = get_weakest_topic()
     current_score = LEARNER_SCORES[weak_topic]
     tier = get_tier(current_score) # Still used for score tracking, though strict persona drives text.
-
-    chunk = get_chunk_by_subtopic(weak_topic)
-
-    # --------------------------------------------------------------
-    # EVALUATION (ONLY IF USER ANSWERS AND NOT JUST FINISHED ONBOARDING)
-    # --------------------------------------------------------------
-    # How to know if just finished? 
-    # Simple check: `user_answer` is provided. 
-    # If it matches an option from the LAST assessment question, it's not a concept answer.
-    # But that's hard to track.
-    # Alternative: The UI script calls `callTutor()` with NULL for first start? 
-    # No, UI sends answer.
-    # Robust fix: `run_initial_assessment` handles the answer. If it consumes it, we shouldn't use it here.
-    # But `tutor_step` just takes `user_answer`.
-    # Let's assume if we hold `user_answer` is consumed if valid for assessment. 
-    # BUT `run_initial_assessment` just returned None. Did it consume? 
-    # Yes, if ONBOARDING_ANSWERS has 5 items.
-    # Let's treat the first turn after onboarding as "No answer provided" for evaluation purposes.
-    # We can rely on a flag or just simplistic logic: 
-    # If `user_answer` is in the set of assessment options... (too risky).
-    # Let's just proceed. If the answer doesn't match the rubric, score won't change much.
-    # Better: explicitly pass a flag `is_assessment_answer`? No, API is simple.
     
-    pass # Proceeding with flow
+    # Validation: Ensure chunk exists
+    try:
+        chunk = get_chunk_by_subtopic(weak_topic)
+    except StopIteration:
+        # Fallback if somehow weak_topic is invalid
+        chunk = KNOWLEDGE[0]
+        weak_topic = chunk["subtopic"]
 
-    if user_answer and USER_PROFILE: 
-         # Only evaluate if it looks like a concept answer?
-         # For simplicity, let's evaluate. The rubric evaluator might give a low score if it's nonsense,
-         # but update_score is weighted. 
-         # Ideally, we should ignore the very first call after profile creation.
-         pass
-         
+    # --------------------------------------------------------------
+    # EVALUATION (ONLY IF USER ANSWERS AND NOT JUST FINISHED ONBOARDING/TOPIC SELECTION)
+    # --------------------------------------------------------------
     if user_answer:
-        eval_score = evaluate_with_rubric(
-            user_answer,
-            chunk["evaluation_rubric"]
-        )
-        LEARNER_SCORES[weak_topic] = update_score(
-            current_score,
-            eval_score
-        )
+        # Only evaluate if we have a valid answer for the *concept*
+        # (Though simple rubric evaluation is robust enough for now)
+        try:
+            eval_score = evaluate_with_rubric(
+                user_answer,
+                chunk["evaluation_rubric"]
+            )
+            LEARNER_SCORES[weak_topic] = update_score(
+                current_score,
+                eval_score
+            )
+        except Exception as e:
+            print(f"Evaluation error: {e}")
+            # Do not crash, just proceed
 
-    # --------------------------------------------------------------
-    # EXPLANATION (GEMINI)
-    # --------------------------------------------------------------
+    # Re-fetch score in case it updated
+    current_score = LEARNER_SCORES[weak_topic]
+    tier = get_tier(current_score)
+
     # --------------------------------------------------------------
     # EXPLANATION (GEMINI)
     # --------------------------------------------------------------
