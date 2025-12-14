@@ -1,0 +1,546 @@
+[
+  {
+    "id": "maf_01",
+    "topic": "mathematical_foundations",
+    "subtopic": "linear_algebra_basics",
+    "difficulty": "foundational",
+    "prerequisites": ["none"],
+    "content": "Scalars, vectors, matrices, tensors. Cover fundamental operations: matrix operations, transpose, inverse, determinant, and rank. Also include norms (L0, L1, L2, L∞) and distance metrics."
+  },
+  {
+    "id": "maf_02",
+    "topic": "mathematical_foundations",
+    "subtopic": "linear_algebra_advanced",
+    "difficulty": "competent",
+    "prerequisites": ["maf_01"],
+    "content": "Column space, null space, projection matrices, and change of basis. Discuss positive definite/semi-definite matrices, the trace of a matrix, and the condition number. Include Eigenvalues & eigenvectors, which are crucial for understanding covariance matrices and PCA."
+  },
+  {
+    "id": "maf_03",
+    "topic": "mathematical_foundations",
+    "subtopic": "matrix_decomposition",
+    "difficulty": "expert",
+    "prerequisites": ["maf_02"],
+    [cite_start]"content": "Spectral decomposition (Decomposes a matrix into eigenvalues and eigenvectors, crucial for understanding covariance matrices and PCA [cite: 1]). [cite_start]Singular Value Decomposition (SVD) (A factorisation of any rectangular matrix A into UΣVᵀ, where U and V are orthogonal [cite: 2] and Σ contains singular values. Used for general matrix analysis and dimensionality reduction.). [cite_start]Low-rank approximation (Finding a matrix of a lower rank that is closest to the original, typically achieved by truncating the SVD to keep only the largest singular values[cite: 3]. This is a form of data compression or noise reduction.). Moore–Penrose pseudoinverse (The generalization of the matrix inverse, computed using SVD, applicable to non-square or singular matrices, and used in least-squares solutions)."
+  },
+  {
+    "id": "maf_04",
+    "topic": "mathematical_foundations",
+    "subtopic": "probability_fundamentals",
+    "difficulty": "foundational",
+    "prerequisites": ["none"],
+    "content": "Probability axioms, Random variables (discrete & continuous), Joint, marginal, and conditional probability, Bayes theorem, Independence vs conditional independence, and the Law of total probability."
+  },
+  {
+    "id": "maf_05",
+    "topic": "mathematical_foundations",
+    "subtopic": "statistical_concepts",
+    "difficulty": "competent",
+    "prerequisites": ["maf_04"],
+    "content": "Probability mass vs density functions, Expectation, variance, covariance, and correlation. Law of large numbers, Central Limit Theorem, and Markov property. [cite_start]Include distributions: Bernoulli, Binomial, Multinomial, Poisson, Uniform, Normal (Gaussian), Exponential, Gamma[cite: 4], and Beta."
+  },
+  {
+    "id": "maf_06",
+    "topic": "mathematical_foundations",
+    "subtopic": "information_theory",
+    "difficulty": "expert",
+    "prerequisites": ["maf_05"],
+    "content": "Concepts of Entropy, Cross-entropy, KL-divergence, and Mutual information. Discuss Likelihood & log-likelihood. Cover estimation techniques: Maximum Likelihood Estimation (MLE) and Maximum A Posteriori (MAP). Introduce Jensen’s inequality."
+  },
+  {
+    "id": "maf_07",
+    "topic": "mathematical_foundations",
+    "subtopic": "descriptive_statistics",
+    "difficulty": "foundational",
+    "prerequisites": ["none"],
+    "content": "Population vs sample, Sampling methods, Descriptive statistics (Mean, median, mode), Quartiles, percentiles, IQR, Skewness & kurtosis."
+  },
+  {
+    "id": "maf_08",
+    "topic": "mathematical_foundations",
+    "subtopic": "inferential_statistics",
+    "difficulty": "competent",
+    "prerequisites": ["maf_07"],
+    "content": "Hypothesis testing (Null & alternative hypothesis), p-value interpretation, Confidence intervals, Z-test, T-test, Chi-square test, and ANOVA. Discuss A/B testing, Type I & Type II errors, and Statistical power and Effect size."
+  },
+  {
+    "id": "maf_09",
+    "topic": "mathematical_foundations",
+    "subtopic": "advanced_statistics",
+    "difficulty": "expert",
+    "prerequisites": ["maf_08"],
+    "content": "Multiple hypothesis testing, Bootstrapping, Resampling methods, and Parametric vs non-parametric tests."
+  },
+  {
+    "id": "maf_10",
+    "topic": "mathematical_foundations",
+    "subtopic": "calculus_basics",
+    "difficulty": "foundational",
+    "prerequisites": ["none"],
+    "content": "Limits & continuity, Differentiation, Partial derivatives, and the Chain rule."
+  },
+  {
+    "id": "maf_11",
+    "topic": "mathematical_foundations",
+    "subtopic": "optimization_gradients",
+    "difficulty": "competent",
+    "prerequisites": ["maf_10"],
+    [cite_start]"content": "Gradients (A vector of partial derivatives that points in the direction of the steepest ascent of a function, fundamental to all machine learning optimization [cite: 4]). [cite_start]Jacobian [cite: 5] [cite_start]& Hessian (The Jacobian is the matrix of all first-order partial derivatives of a vector-valued function[cite: 5]. [cite_start]The Hessian is the matrix of all second-order partial derivatives [cite: 6][cite_start], used to determine if a critical point is a minimum or maximum [cite: 6])."
+  },
+  {
+    "id": "maf_12",
+    "topic": "mathematical_foundations",
+    "subtopic": "optimization_theory",
+    "difficulty": "expert",
+    "prerequisites": ["maf_11"],
+    "content": "Local vs global minima, Convex vs non-convex functions, and Saddle points. Discuss Vanishing & exploding gradients, Line search, Constrained optimization, Lagrange multipliers, and Duality."
+  },
+  {
+    "id": "prg_01",
+    "topic": "programming_and_software",
+    "subtopic": "python_core",
+    "difficulty": "foundational",
+    "prerequisites": ["none"],
+    "content": "Data types, Control flow, Functions & lambdas, Recursion, Exception handling, File I/O, Object-Oriented Programming, and Modules & packages."
+  },
+  {
+    "id": "prg_02",
+    "topic": "programming_and_software",
+    "subtopic": "python_data_science",
+    "difficulty": "foundational",
+    "prerequisites": ["prg_01"],
+    "content": "NumPy (vectorization, broadcasting). Pandas (Series, DataFrame, Indexing & slicing, Missing value handling, Merging & joining, GroupBy operations, and Time-series handling)."
+  },
+  {
+    "id": "prg_03",
+    "topic": "programming_and_software",
+    "subtopic": "performance_and_env",
+    "difficulty": "competent",
+    "prerequisites": ["prg_01"],
+    [cite_start]"content": "Virtual environments (venv, conda), Dependency management[cite: 7], Memory management, Profiling & optimization, and Multithreading vs multiprocessing."
+  },
+  {
+    "id": "prg_04",
+    "topic": "programming_and_software",
+    "subtopic": "visualization",
+    "difficulty": "foundational",
+    "prerequisites": ["prg_02"],
+    "content": "Matplotlib, Seaborn. Cover Line, bar, histogram, Box, violin plots, Scatter, heatmaps, and Interactive visualization concepts."
+  },
+  {
+    "id": "deng_01",
+    "topic": "data_engineering_and_handling",
+    "subtopic": "data_collection",
+    "difficulty": "foundational",
+    "prerequisites": ["prg_01"],
+    "content": "Data types (Structured, unstructured, semi-structured). Data Collection methods: APIs, Web scraping, Databases (SQL & NoSQL), Data pipelines, and Batch vs streaming data."
+  },
+  {
+    "id": "deng_02",
+    "topic": "data_engineering_and_handling",
+    "subtopic": "data_engineering_concepts",
+    "difficulty": "competent",
+    "prerequisites": ["deng_01"],
+    "content": "ETL vs ELT, Schema evolution, Data versioning, Data quality checks, Slowly Changing Dimensions (SCD), Feature stores, Data labeling strategies, and Human-in-the-loop systems."
+  },
+  {
+    "id": "eda_01",
+    "topic": "exploratory_data_analysis",
+    "subtopic": "eda_techniques",
+    "difficulty": "foundational",
+    "prerequisites": ["prg_02", "maf_07"],
+    [cite_start]"content": "Data profiling, Summary statistics, Distribution analysis, Outlier detection, Correlation & causation, Feature relationships, and Data leakage detection (including Time-based [cite: 8] leakage)."
+  },
+  {
+    "id": "dcf_01",
+    "topic": "data_cleaning_and_feature_engineering",
+    "subtopic": "data_cleaning",
+    "difficulty": "foundational",
+    "prerequisites": ["eda_01"],
+    "content": "Missing data types, Imputation strategies, Duplicate handling, Noise reduction, Inconsistent data handling, Categorical encoding, and Text normalization."
+  },
+  {
+    "id": "dcf_02",
+    "topic": "data_cleaning_and_feature_engineering",
+    "subtopic": "feature_scaling_and_transforms",
+    "difficulty": "competent",
+    "prerequisites": ["dcf_01"],
+    "content": "Feature scaling (Normalization & standardization), Log & power transforms, Polynomial features, Binning, and Interaction features."
+  },
+  {
+    "id": "dcf_03",
+    "topic": "data_cleaning_and_feature_engineering",
+    "subtopic": "advanced_feature_engineering",
+    "difficulty": "expert",
+    "prerequisites": ["dcf_02"],
+    "content": "Date-time features, Text features (TF-IDF, n-grams), Image features, Target encoding, Mean encoding leakage risks, Feature hashing, and Embeddings. Discuss the Curse of dimensionality and Feature drift."
+  },
+  {
+    "id": "cmt_01",
+    "topic": "core_machine_learning_theory",
+    "subtopic": "learning_paradigms",
+    "difficulty": "foundational",
+    "prerequisites": ["none"],
+    "content": "Supervised learning, Unsupervised learning, Semi-supervised learning, Self-supervised learning, and Reinforcement learning."
+  },
+  {
+    "id": "cmt_02",
+    "topic": "core_machine_learning_theory",
+    "subtopic": "bias_variance_theory",
+    "difficulty": "competent",
+    "prerequisites": ["maf_08"],
+    [cite_start]"content": "Bias-variance decomposition (Decomposes the expected test [cite: 9] [cite_start]error into the sum of bias (underfitting), variance (overfitting), and irreducible noise[cite: 10]. [cite_start]It is the central trade-off in model complexity [cite: 10]). Discuss Generalization and Overfitting theory."
+  },
+  {
+    "id": "cmt_03",
+    "topic": "core_machine_learning_theory",
+    "subtopic": "advanced_learning_theory",
+    "difficulty": "expert",
+    "prerequisites": ["cmt_02"],
+    "content": "Empirical Risk Minimization (ERM), Structural Risk Minimization (SRM), No Free Lunch theorem, VC dimension (Vapnik–Chervonenkis dimension: A measure of the capacity or complexity of a function class, used to set generalization bounds), and PAC learning (Probably Approximately Correct: A framework defining the mathematical conditions under which a learner can successfully generalize from a sample to an entire data distribution)."
+  },
+  {
+    "id": "cmt_04",
+    "topic": "core_machine_learning_theory",
+    "subtopic": "advanced_theory_specific",
+    "difficulty": "expert",
+    "prerequisites": ["cmt_03"],
+    "content": "Specific theoretical concepts: No Free Lunch theorem, Generalization theory, Overfitting theory, and the Curse of dimensionality (the phenomenon where the performance of ML models degrades as the number of features increases)."
+  },
+  {
+    "id": "sla_01",
+    "topic": "supervised_learning_algorithms",
+    "subtopic": "regression_linear_regularized",
+    "difficulty": "competent",
+    "prerequisites": ["cmt_01", "maf_11"],
+    "content": "Linear regression, Polynomial regression, Ridge, Lasso, and Elastic Net regularization. Include Bayesian regression."
+  },
+  {
+    "id": "sla_02",
+    "topic": "supervised_learning_algorithms",
+    "subtopic": "classification_foundational",
+    "difficulty": "competent",
+    "prerequisites": ["cmt_01"],
+    "content": "Logistic regression, k-Nearest Neighbors, Naive Bayes, Decision trees, and Perceptron. Include Passive-Aggressive algorithms."
+  },
+  {
+    "id": "sla_03",
+    "topic": "supervised_learning_algorithms",
+    "subtopic": "classification_ensemble",
+    "difficulty": "expert",
+    "prerequisites": ["sla_02"],
+    "content": "Random Forest (Bagging), Gradient Boosting (GBM), and advanced boosting methods: XGBoost, LightGBM, CatBoost. Discuss Support Vector Machines."
+  },
+  {
+    "id": "sla_04",
+    "topic": "supervised_learning_algorithms",
+    "subtopic": "linear_discriminant_analysis",
+    "difficulty": "competent",
+    "prerequisites": ["sla_02"],
+    [cite_start]"content": "Linear Discriminant Analysis (LDA) and Quadratic Discriminant Analysis (QDA)[cite: 11]. LDA is a dimensionality reduction technique used in the preprocessing stage for classification and is also a linear classification model. QDA is a non-linear variant."
+  },
+  {
+    "id": "ula_01",
+    "topic": "unsupervised_learning",
+    "subtopic": "clustering",
+    "difficulty": "competent",
+    "prerequisites": ["cmt_01", "dcf_02"],
+    "content": "K-Means, Hierarchical clustering, DBSCAN, OPTICS, Gaussian Mixture Models, and Spectral clustering."
+  },
+  {
+    "id": "ula_02",
+    "topic": "unsupervised_learning",
+    "subtopic": "dimensionality_reduction",
+    "difficulty": "competent",
+    "prerequisites": ["maf_03"],
+    "content": "PCA (Principal Component Analysis), ICA (Independent Component Analysis), t-SNE, and UMAP."
+  },
+  {
+    "id": "ula_03",
+    "topic": "unsupervised_learning",
+    "subtopic": "association_and_anomaly",
+    "difficulty": "expert",
+    "prerequisites": ["ula_01"],
+    "content": "Association rules (Apriori, FP-Growth). Anomaly detection algorithms: Isolation Forest, One-Class SVM, and Local Outlier Factor."
+  },
+  {
+    "id": "opt_01",
+    "topic": "optimization_and_training",
+    "subtopic": "first_order_optimizers",
+    "difficulty": "competent",
+    "prerequisites": ["maf_11"],
+    "content": "Gradient Descent theory (Batch, Mini-batch, Stochastic GD). [cite_start]Advanced momentum-based optimizers: Momentum (Uses a fraction of the previous update vector to speed up convergence, especially along shallow gradients, while dampening oscillations [cite: 12][cite_start]) and Nesterov Accelerated Gradient (NAG) (A lookahead version of Momentum that computes the gradient at an anticipated future position, leading to faster and more stable convergence [cite: 12])."
+  },
+  {
+    "id": "opt_02",
+    "topic": "optimization_and_training",
+    "subtopic": "adaptive_optimizers",
+    "difficulty": "expert",
+    "prerequisites": ["opt_01"],
+    [cite_start]"content": "Adaptive learning rate optimizers: AdaGrad [cite: 12][cite_start], RMSProp [cite: 12][cite_start], and Adam/AdamW [cite: 13] (Adam combines Momentum and RMSProp. It computes individual adaptive learning rates for different parameters based on the first (mean) [cite_start]and second (variance) moments of the gradients[cite: 13]. [cite_start]AdamW is a corrected version that properly handles weight decay [cite: 13]). Discuss Learning-rate scheduling and Warm-up strategies."
+  },
+  {
+    "id": "opt_03",
+    "topic": "optimization_and_training",
+    "subtopic": "optimization_theory",
+    "difficulty": "expert",
+    "prerequisites": ["opt_02", "maf_12"],
+    "content": "Loss landscapes, Saddle points vs minima, Flat vs sharp minima, Second-order methods, Newton & Quasi-Newton methods, Hessian-based intuition, Ill-conditioned optimization, and Regularization as optimization."
+  },
+  {
+    "id": "met_01",
+    "topic": "model_evaluation_and_validation",
+    "subtopic": "validation_strategies",
+    "difficulty": "competent",
+    "prerequisites": ["cmt_02"],
+    "content": "Train / validation / test split, k-Fold cross-validation, Stratified k-Fold, Group k-Fold, Nested cross-validation, and Time-series validation (walk-forward)."
+  },
+  {
+    "id": "met_02",
+    "topic": "model_evaluation_and_validation",
+    "subtopic": "regression_metrics",
+    "difficulty": "foundational",
+    "prerequisites": ["sla_01"],
+    "content": "Regression metrics: MSE, RMSE, MAE, and R²."
+  },
+  {
+    "id": "met_03",
+    "topic": "model_evaluation_and_validation",
+    "subtopic": "classification_metrics",
+    "difficulty": "competent",
+    "prerequisites": ["sla_02"],
+    "content": "Confusion matrix, Classification metrics (Accuracy, Precision, Recall, F1), ROC-AUC, Precision-Recall curve, and Threshold tuning. Discuss Calibration (Platt scaling, isotonic regression), Cost-sensitive learning, and Business vs ML metrics."
+  },
+  {
+    "id": "met_04",
+    "topic": "model_evaluation_and_validation",
+    "subtopic": "advanced_metrics",
+    "difficulty": "expert",
+    "prerequisites": ["met_03"],
+    [cite_start]"content": "Statistical significance testing [cite: 14] and Confidence estimation."
+  },
+  {
+    "id": "dpl_01",
+    "topic": "deep_learning",
+    "subtopic": "nn_fundamentals",
+    "difficulty": "competent",
+    "prerequisites": ["opt_01", "maf_11"],
+    "content": "Perceptron, Feed-forward networks, Activation functions, Loss functions, Backpropagation, and Computational graphs."
+  },
+  {
+    "id": "dpl_02",
+    "topic": "deep_learning",
+    "subtopic": "dl_training_techniques",
+    "difficulty": "expert",
+    "prerequisites": ["dpl_01"],
+    [cite_start]"content": "Weight initialization strategies, Batch Normalization (BN) (Normalizes the output of an activation layer by adjusting and scaling the activations using the batch mean and variance, improving training stability and convergence speed [cite: 15][cite_start]), Layer Normalization (LN) (Normalizes the inputs across the features (hidden size) within a single training sample, instead of across the batch[cite: 15]. Commonly used in recurrent networks and Transformers.), Dropout, Regularization in DL, Residual connections, and Gradient clipping."
+  },
+  {
+    "id": "dpl_03",
+    "topic": "deep_learning",
+    "subtopic": "cnn_architectures",
+    "difficulty": "expert",
+    "prerequisites": ["dpl_01"],
+    "content": "Convolutional Neural Networks (CNNs), Pooling operations, and key CNN architectures."
+  },
+  {
+    "id": "dpl_04",
+    "topic": "deep_learning",
+    "subtopic": "rnn_and_attention",
+    "difficulty": "expert",
+    "prerequisites": ["dpl_01"],
+    "content": "Recurrent Neural Networks (RNNs), LSTM & GRU, Attention mechanism (math intuition), Transformers, Positional encoding, and Encoder-decoder models."
+  },
+  {
+    "id": "dpl_05",
+    "topic": "deep_learning",
+    "subtopic": "advanced_concepts",
+    "difficulty": "expert",
+    "prerequisites": ["dpl_04"],
+    "content": "Transfer learning, Fine-tuning strategies, Pretraining vs finetuning, Overparameterization, Loss surface intuition, and Scaling laws."
+  },
+  {
+    "id": "spz_01",
+    "topic": "specialized_ml_domains",
+    "subtopic": "ml_subfields",
+    "difficulty": "expert",
+    "prerequisites": ["sla_03", "dpl_04"],
+    "content": "Natural Language Processing (NLP), Computer Vision (CV), Time-series forecasting, Recommendation systems, Anomaly detection, Graph Machine Learning, and Reinforcement Learning basics."
+  },
+  {
+    "id": "dep_01",
+    "topic": "deployment_engineering",
+    "subtopic": "model_deployment",
+    "difficulty": "competent",
+    "prerequisites": ["prg_01"],
+    "content": "Model serialization, Offline vs online inference, REST APIs, Flask / FastAPI, Batch inference, and Real-time inference."
+  },
+  {
+    "id": "dep_02",
+    "topic": "deployment_engineering",
+    "subtopic": "production_concerns",
+    "difficulty": "expert",
+    "prerequisites": ["dep_01"],
+    [cite_start]"content": "Latency vs throughput, Scalability, Load balancing, Caching, Rollbacks, Canary deployment, Shadow deployment, and A/B model testing[cite: 16]."
+  },
+  {
+    "id": "dep_03",
+    "topic": "deployment_engineering",
+    "subtopic": "production_pipeline_testing",
+    "difficulty": "expert",
+    "prerequisites": ["dep_02"],
+    "content": "Advanced deployment strategies: Rollbacks, Canary deployment (deploying a new model version to a small subset of users to test stability), Shadow deployment (routing live traffic to a new model version without affecting real-time user decisions), and A/B model testing."
+  },
+  {
+    "id": "mlo_01",
+    "topic": "mlops_full_lifecycle",
+    "subtopic": "experimentation_and_versioning",
+    "difficulty": "competent",
+    "prerequisites": ["dep_01"],
+    "content": "Experiment tracking theory, Reproducibility, Random seeds, Data versioning, Model versioning, Feature versioning, and Model registries."
+  },
+  {
+    "id": "mlo_02",
+    "topic": "mlops_full_lifecycle",
+    "subtopic": "monitoring_and_retraining",
+    "difficulty": "expert",
+    "prerequisites": ["mlo_01"],
+    "content": "Data drift, Concept drift, Prediction drift, Performance degradation, Alerting systems, Retraining triggers, Automated pipelines, and Human approval loops."
+  },
+  {
+    "id": "mlo_03",
+    "topic": "mlops_full_lifecycle",
+    "subtopic": "experiment_and_reproducibility",
+    "difficulty": "competent",
+    "prerequisites": ["mlo_01"],
+    "content": "Detailed experimentation concepts: Experiment tracking theory, ensuring Reproducibility through environment and code logging, and the importance of setting Random seeds."
+  },
+  {
+    "id": "mlo_04",
+    "topic": "mlops_full_lifecycle",
+    "subtopic": "advanced_versioning",
+    "difficulty": "expert",
+    "prerequisites": ["mlo_01"],
+    "content": "Comprehensive versioning strategy: Data versioning, Model versioning, Feature versioning, and using Model registries for centralized storage and management."
+  },
+  {
+    "id": "mlo_05",
+    "topic": "mlops_full_lifecycle",
+    "subtopic": "model_monitoring_deep_dive",
+    "difficulty": "expert",
+    "prerequisites": ["mlo_02"],
+    "content": "In-depth model monitoring: Identifying Data drift, Concept drift, and Prediction drift. Setting up Performance degradation alerts and Alerting systems for production stability."
+  },
+  {
+    "id": "mlo_06",
+    "topic": "mlops_full_lifecycle",
+    "subtopic": "automated_retraining",
+    "difficulty": "expert",
+    "prerequisites": ["mlo_02"],
+    "content": "Automated retraining pipeline: Defining Retraining triggers (e.g., scheduled time, drift detection), establishing Automated pipelines, and incorporating Human approval loops for governance."
+  },
+  {
+    "id": "gev_01",
+    "topic": "governance_ethics_and_reliability",
+    "subtopic": "xai_and_fairness",
+    "difficulty": "competent",
+    "prerequisites": ["met_03"],
+    "content": "Explainable AI (SHAP, LIME), Fairness & bias detection, and Ethical AI principles."
+  },
+  {
+    "id": "gev_02",
+    "topic": "governance_ethics_and_reliability",
+    "subtopic": "compliance_and_reliability",
+    "difficulty": "expert",
+    "prerequisites": ["dep_02"],
+    "content": "Model governance, Compliance basics (GDPR), Security considerations, Failure analysis, Post-mortems, Technical debt in ML, and Model decay."
+  },
+  {
+    "id": "gev_03",
+    "topic": "governance_ethics_and_reliability",
+    "subtopic": "failure_analysis_and_debt",
+    "difficulty": "expert",
+    "prerequisites": ["gev_02"],
+    "content": "Reliability engineering for ML: Conducting Failure analysis and Post-mortems after incidents. Understanding Technical debt in ML and strategies to prevent Model decay."
+  },
+  {
+    "id": "tls_01",
+    "topic": "tools_and_platforms",
+    "subtopic": "ml_libraries",
+    "difficulty": "foundational",
+    "prerequisites": ["prg_02"],
+    "content": "Scikit-learn, TensorFlow, and PyTorch."
+  },
+  {
+    "id": "tls_02",
+    "topic": "tools_and_platforms",
+    "subtopic": "mlo_tools_and_big_data",
+    "difficulty": "competent",
+    "prerequisites": ["dep_01"],
+    "content": "Spark / PySpark, MLflow, DVC, Airflow, Kubernetes, Feature stores (Feast), and Monitoring tools (Evidently, Prometheus)."
+  },
+  {
+    "id": "tls_03",
+    "topic": "tools_and_platforms",
+    "subtopic": "big_data_tools",
+    "difficulty": "competent",
+    "prerequisites": ["prg_02"],
+    [cite_start]"content": "Big Data and MLOps ecosystem tools: Spark / PySpark [cite: 17] for distributed computing, MLflow for experiment and model management, DVC for data versioning, Airflow for workflow orchestration, and Kubernetes for container orchestration."
+  },
+  {
+    "id": "fut_01",
+    "topic": "research_theory_and_future_trends",
+    "subtopic": "advanced_theory",
+    "difficulty": "expert",
+    "prerequisites": ["cmt_03"],
+    "content": "Bias-variance tradeoff (formal), VC dimension intuition, PAC learning theory, Generalization bounds, and Curse of dimensionality."
+  },
+  {
+    "id": "fut_02",
+    "topic": "research_theory_and_future_trends",
+    "subtopic": "future_trends",
+    "difficulty": "expert",
+    "prerequisites": ["spz_01"],
+    "content": "AutoML, Federated learning, Edge ML, Responsible AI, and Foundation models."
+  },
+  {
+    "id": "fut_03",
+    "topic": "research_theory_and_future_trends",
+    "subtopic": "theoretical_foundations",
+    "difficulty": "expert",
+    "prerequisites": ["fut_01"],
+    "content": "Formal theoretical concepts: Bias-variance tradeoff (formal definition), VC dimension intuition, PAC learning theory, and Generalization bounds."
+  },
+  {
+    "id": "rlc_01",
+    "topic": "real_world_ml_project_lifecycle",
+    "subtopic": "project_management",
+    "difficulty": "competent",
+    "prerequisites": ["all_foundational_competent"],
+    "content": "Problem framing mistakes, Stakeholder alignment, Data availability risks, Baseline models, Iterative improvement, Failure cases, Post-deployment monitoring, and Model retirement."
+  },
+  {
+    "id": "rlc_02",
+    "topic": "real_world_ml_project_lifecycle",
+    "subtopic": "project_challenges",
+    "difficulty": "expert",
+    "prerequisites": ["rlc_01"],
+    "content": "Focus on real-world constraints: Recognizing Problem framing mistakes, ensuring Stakeholder alignment, assessing Data availability risks, establishing strong Baseline models, emphasizing Iterative improvement, and learning from Failure cases."
+  },
+  {
+    "id": "car_01",
+    "topic": "ml_career_readiness",
+    "subtopic": "career_tracks_and_skills",
+    "difficulty": "competent",
+    "prerequisites": ["rlc_01"],
+    "content": "ML Engineer vs Data Scientist vs Researcher, Interview-level ML theory, System design for ML, Portfolio-ready projects, Reading ML papers, and Continuous learning strategies."
+  },
+  {
+    "id": "car_02",
+    "topic": "ml_career_readiness",
+    "subtopic": "system_design_and_papers",
+    "difficulty": "expert",
+    "prerequisites": ["car_01"],
+    "content": "High-level professional skills: Interview-level ML theory, System design for ML, strategies for reading ML papers, and Continuous learning strategies to stay current in the field."
+  }
+]

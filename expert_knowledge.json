@@ -1,0 +1,327 @@
+[
+  {
+    "id": "maf_01",
+    "topic": "mathematical_foundations",
+    "subtopic": "linear_algebra_basics",
+    "difficulty": "foundational",
+    "explanation": "Fundamental concepts of linear algebra, including the definition of basic data structures (scalars, vectors, matrices, tensors) and essential operations like addition, multiplication, transpose, inverse, determinant, and rank. Also covers methods for calculating magnitude and distance using various norms (L0, L1, L2, L_infinity) and distance metrics.",
+    "assessment": "Test on definitions, basic calculations of matrix operations, determinant/rank of small matrices (2x2, 3x3), and calculation of L1 and L2 norms for vectors.",
+    "evaluation_rubric": {
+      "foundational": "Define all terms; correctly compute basic matrix arithmetic, transpose, and L2 norm.",
+      "competent": "Correctly compute determinant and rank for 3x3 matrices; explain the geometric meaning of L2 and L_infinity norms.",
+      "expert": "Explain the role of the determinant in matrix invertibility and the significance of matrix rank; calculate all specified norms."
+    }
+  },
+  {
+    "id": "maf_02",
+    "topic": "mathematical_foundations",
+    "subtopic": "linear_algebra_advanced",
+    "difficulty": "competent",
+    "explanation": "Core concepts for analyzing vector spaces, including column space and null space, and their application in solving linear systems. Covers projection matrices, change of basis, and properties of special matrices (positive definite/semi-definite). Eigenvalues and eigenvectors are introduced as crucial tools for understanding variance and dimensionality reduction (PCA).",
+    "assessment": "Conceptual questions on column/null space, calculation of eigenvalues/eigenvectors for a 2x2 matrix, and defining positive definite matrices and the condition number.",
+    "evaluation_rubric": {
+      "foundational": "Define eigenvalues/eigenvectors and trace; state the use of eigenvectors in PCA.",
+      "competent": "Calculate eigenvalues/eigenvectors for a simple matrix; explain the difference between positive definite and semi-definite matrices; articulate the meaning of column/null space.",
+      "expert": "Explain the role of projection matrices in least-squares and how change of basis works; interpret the condition number and its implications for numerical stability."
+    }
+  },
+  {
+    "id": "maf_03",
+    "topic": "mathematical_foundations",
+    "subtopic": "matrix_decomposition",
+    "difficulty": "expert",
+    "explanation": "Methods for factoring matrices into simpler, constituent parts. Spectral Decomposition uses eigenvalues/eigenvectors, primarily for symmetric matrices. Singular Value Decomposition (SVD) factorizes any matrix (A into U Sigma V_T) and is the basis for Low-rank approximation for compression/noise reduction. The Moore-Penrose pseudoinverse is a generalized inverse for non-square or singular matrices, computed via SVD, often used in least-squares problems.",
+    "assessment": "Conceptual understanding of SVD components and their application in PCA/low-rank approximation. Explain when and why the pseudoinverse is needed.",
+    "evaluation_rubric": {
+      "foundational": "Define SVD and its purpose (dimensionality reduction).",
+      "competent": "Describe the components of SVD (U, Sigma, V_T); explain how low-rank approximation is achieved by truncating SVD.",
+      "expert": "Explain the difference between Spectral Decomposition and SVD; articulate the mathematical definition and use case of the Moore-Penrose pseudoinverse (e.g., in solving Ax=b when A is not invertible)."
+    }
+  },
+  {
+    "id": "maf_04",
+    "topic": "mathematical_foundations",
+    "subtopic": "probability_fundamentals",
+    "difficulty": "foundational",
+    "explanation": "The core rules (axioms) of probability, the distinction between discrete and continuous random variables, and the relationships between events: joint, marginal, and conditional probabilities. Includes Bayes' Theorem for updating probabilities based on new evidence, the concept of Independence vs. Conditional Independence, and the Law of Total Probability.",
+    "assessment": "Solve basic probability problems involving joint/conditional probability and apply Bayes' Theorem. Distinguish between independent and conditionally independent events.",
+    "evaluation_rubric": {
+      "foundational": "State probability axioms; correctly compute conditional probability; state Bayes' Theorem.",
+      "competent": "Apply Bayes' Theorem to a simple problem; explain the Law of Total Probability; distinguish between the two types of random variables.",
+      "expert": "Articulate the precise mathematical difference between independence and conditional independence in the context of three variables."
+    }
+  },
+  {
+    "id": "maf_05",
+    "topic": "mathematical_foundations",
+    "subtopic": "statistical_concepts",
+    "difficulty": "competent",
+    "explanation": "Covers the functions defining random variables (PMF for discrete, PDF for continuous), measures of central tendency and spread (Expectation, Variance), and relationships between variables (Covariance, Correlation). Includes two fundamental theorems: Law of Large Numbers and the Central Limit Theorem (CLT), which explains why the Normal distribution is so prevalent. Requires knowledge of key probability distributions (e.g., Normal, Bernoulli, Poisson).",
+    "assessment": "Explain the CLT and its significance. Calculate expectation/variance for a simple distribution. Describe the relationship between covariance and correlation.",
+    "evaluation_rubric": {
+      "foundational": "Define PMF/PDF; calculate expectation and variance for a simple case; identify the Normal and Bernoulli distributions.",
+      "competent": "Explain the Central Limit Theorem and its practical implication; define and interpret covariance and correlation; list and describe the key parameters for the Normal, Poisson, and Exponential distributions.",
+      "expert": "Articulate the formal Law of Large Numbers; discuss the conditions under which the CLT holds; explain the Markov property in time-series."
+    }
+  },
+  {
+    "id": "maf_06",
+    "topic": "mathematical_foundations",
+    "subtopic": "information_theory",
+    "difficulty": "expert",
+    "explanation": "Entropy measures uncertainty in a distribution. Cross-entropy measures the difference between two probability distributions and is a common loss function in classification. KL-divergence measures the information lost when approximating one distribution with another. Mutual Information quantifies the dependency between two random variables. Covers estimation techniques: Maximum Likelihood Estimation (MLE) and Maximum A Posteriori (MAP). Jensen's inequality relates the value of a convex function of an expectation to the expectation of the convex function.",
+    "assessment": "Explain the differences between Entropy, Cross-entropy, and KL-Divergence. Differentiate MLE and MAP estimation.",
+    "evaluation_rubric": {
+      "foundational": "Define Entropy and Likelihood.",
+      "competent": "Explain the use of Cross-entropy as a loss function; differentiate between MLE and MAP (mentioning the prior).",
+      "expert": "Explain the mathematical relationship between Entropy, Cross-entropy, and KL-divergence; articulate the meaning of Mutual Information; state and explain Jensen's inequality."
+    }
+  },
+  {
+    "id": "maf_07",
+    "topic": "mathematical_foundations",
+    "subtopic": "descriptive_statistics",
+    "difficulty": "foundational",
+    "explanation": "Covers the distinction between a Population (the entire group of interest) and a Sample (a subset). Discusses basic Sampling Methods. Descriptive statistics summarize data: Mean, Median, Mode for central tendency, and Quartiles, Percentiles, IQR (Interquartile Range) for spread. Skewness and Kurtosis describe the shape of the distribution.",
+    "assessment": "Calculate mean, median, and IQR for a small dataset. Define skewness and kurtosis and what they indicate about a distribution.",
+    "evaluation_rubric": {
+      "foundational": "Define and calculate mean, median, and mode; explain the difference between a population and a sample.",
+      "competent": "Calculate and interpret IQR; explain the concepts of skewness and kurtosis with examples (e.g., positive skew).",
+      "expert": "Describe stratified and systematic sampling methods; explain how outliers affect the mean vs. the median."
+    }
+  },
+  {
+    "id": "maf_08",
+    "topic": "mathematical_foundations",
+    "subtopic": "inferential_statistics",
+    "difficulty": "competent",
+    "explanation": "Methods for drawing conclusions about a population from a sample. Covers the mechanics of Hypothesis Testing (Null H_0 and Alternative H_a), interpretation of the p-value, and constructing Confidence Intervals. Includes common tests (Z-test, T-test, Chi-square test, ANOVA). Discusses key concepts for evaluating test performance: Type I/II Errors and Statistical Power/Effect Size.",
+    "assessment": "Explain the p-value and Confidence Interval interpretation. Differentiate Type I and Type II errors. Choose the correct test (Z vs T vs Chi-square) for a given scenario.",
+    "evaluation_rubric": {
+      "foundational": "Define Null/Alternative hypotheses; interpret the p-value correctly; define Type I and Type II errors.",
+      "competent": "Explain the Central Limit Theorem's role in inferential stats; explain the difference between T-test and Z-test; describe the basic structure of an A/B test.",
+      "expert": "Define and explain Statistical Power and Effect Size; explain the conditions for using ANOVA; explain the concept of a Confidence Interval formally."
+    }
+  },
+  {
+    "id": "maf_09",
+    "topic": "mathematical_foundations",
+    "subtopic": "advanced_statistics",
+    "difficulty": "expert",
+    "explanation": "Covers challenges and advanced techniques in statistical inference. Multiple Hypothesis Testing deals with the increased chance of false positives when running multiple tests (requiring correction methods like Bonferroni). Bootstrapping and Resampling methods use random subsets of data to estimate the distribution of a statistic. Parametric vs. Non-parametric tests distinguishes methods that assume a specific distribution (e.g., Normal) from those that do not.",
+    "assessment": "Explain why multiple hypothesis testing is a problem and name a solution. Describe the bootstrapping process. Differentiate parametric and non-parametric tests.",
+    "evaluation_rubric": {
+      "foundational": "Define bootstrapping and non-parametric tests.",
+      "competent": "Describe the need for multiple hypothesis testing correction; explain the basic mechanics of bootstrapping for estimating a confidence interval.",
+      "expert": "Articulate the formal problem of Multiple Hypothesis Testing (Family-wise Error Rate); compare the advantages/disadvantages of Parametric vs. Non-parametric tests."
+    }
+  },
+  {
+    "id": "maf_10",
+    "topic": "mathematical_foundations",
+    "subtopic": "calculus_basics",
+    "difficulty": "foundational",
+    "explanation": "Foundational concepts for understanding optimization. Limits & Continuity define the behavior of functions. Differentiation calculates the instantaneous rate of change (the slope). Partial Derivatives calculate the rate of change of a multivariable function with respect to one variable. The Chain Rule is essential for calculating the derivative of a composite function (the backbone of backpropagation in Neural Networks).",
+    "assessment": "Calculate a partial derivative for a simple multivariable function. State the Chain Rule and its significance in ML.",
+    "evaluation_rubric": {
+      "foundational": "Define a limit and continuity; compute a simple single-variable derivative.",
+      "competent": "Compute partial derivatives for simple functions; state and apply the Chain Rule to a composite function.",
+      "expert": "Explain the geometric interpretation of a partial derivative; explain why the Chain Rule is the foundation of the Backpropagation algorithm."
+    }
+  },
+  {
+    "id": "maf_11",
+    "topic": "mathematical_foundations",
+    "subtopic": "optimization_gradients",
+    "difficulty": "competent",
+    "explanation": "The Gradient is a vector of all first-order partial derivatives of a scalar-valued function, pointing in the direction of the steepest ascent. The Jacobian is the matrix of all first-order partial derivatives of a vector-valued function. The Hessian is the matrix of all second-order partial derivatives, used to determine if a critical point is a local minimum, maximum, or saddle point, and for second-order optimization methods.",
+    "assessment": "Explain the geometric meaning of the gradient vector. Define and differentiate the purpose of the Jacobian and Hessian matrices.",
+    "evaluation_rubric": {
+      "foundational": "Define the gradient and its direction of ascent/descent.",
+      "competent": "Explain the role of the gradient in Gradient Descent; define the Hessian and its use for classifying critical points.",
+      "expert": "Formally define the Jacobian and Hessian matrices; explain how the Hessian's eigenvalues determine the nature of a critical point; explain the role of the Jacobian in the chain rule for vector-valued functions."
+    }
+  },
+  {
+    "id": "maf_12",
+    "topic": "mathematical_foundations",
+    "subtopic": "optimization_theory",
+    "difficulty": "expert",
+    "explanation": "Advanced concepts in optimizing functions. Local vs. Global Minima distinguishes between the best solution in a neighborhood and the overall best solution. Convex vs. Non-Convex Functions determines if a local minimum is guaranteed to be the global minimum (convex). Discusses problems like Vanishing/Exploding Gradients. Lagrange Multipliers and Duality are techniques for solving constrained optimization problems.",
+    "assessment": "Differentiate convex and non-convex functions. Explain the concept of a saddle point. Describe how Lagrange multipliers are used.",
+    "evaluation_rubric": {
+      "foundational": "Define local and global minima.",
+      "competent": "Differentiate convex and non-convex optimization problems; describe the problem of vanishing/exploding gradients.",
+      "expert": "Explain the role of Lagrange multipliers in constrained optimization; articulate the difference between primal and dual problems in optimization; explain the nature of a saddle point in a loss landscape."
+    }
+  },
+  {
+    "id": "prg_01",
+    "topic": "programming_and_software",
+    "subtopic": "python_core",
+    "difficulty": "foundational",
+    "explanation": "Core Python programming skills necessary for any ML role. Covers fundamental language constructs: data types, logic (Control Flow), reusable code blocks (Functions), error handling (Exception Handling), file management, and structured programming (Object-Oriented Programming).",
+    "assessment": "Write a Python function with error handling. Demonstrate understanding of list comprehensions, lambda functions, and basic class/object usage.",
+    "evaluation_rubric": {
+      "foundational": "Demonstrate correct use of data types, loops, and conditional statements; write a basic function.",
+      "competent": "Implement correct exception handling (try/except); use list/dict comprehensions and lambda functions effectively; demonstrate basic OOP (class, inheritance).",
+      "expert": "Implement file I/O operations; demonstrate an understanding of Python modules/packages (imports and structure); explain the pros/cons of recursion."
+    }
+  },
+  {
+    "id": "prg_02",
+    "topic": "programming_and_software",
+    "subtopic": "python_data_science",
+    "difficulty": "foundational",
+    "explanation": "Essential libraries for data manipulation. NumPy provides efficient array manipulation, crucial for matrix operations in ML, including vectorization for speed and broadcasting for simplified element-wise operations. Pandas is for tabular data, covering its core structures (Series, DataFrame), data access (Indexing & slicing), preparation (Missing value handling, Merging & joining), and analysis (GroupBy operations).",
+    "assessment": "Perform a vectorized operation in NumPy. Use Pandas to load a file, handle missing data, perform a GroupBy, and merge two DataFrames.",
+    "evaluation_rubric": {
+      "foundational": "Create and manipulate NumPy arrays; load a CSV into a Pandas DataFrame; select and filter data.",
+      "competent": "Perform GroupBy operations, merge/join two dataframes; explain the concept of NumPy broadcasting; handle missing values (imputation or dropping).",
+      "expert": "Demonstrate efficient vectorized code instead of loops; perform complex time-series operations in Pandas; explain the performance benefit of vectorization over explicit loops."
+    }
+  },
+  {
+    "id": "prg_03",
+    "topic": "programming_and_software",
+    "subtopic": "performance_and_env",
+    "difficulty": "competent",
+    "explanation": "Skills for managing software environments and performance. Virtual environments (venv, conda) isolate project dependencies. Dependency management ensures consistent versions. Memory management and Profiling & optimization are needed for efficient code. Multithreading vs. Multiprocessing addresses parallel execution (threading for I/O-bound tasks, multiprocessing for CPU-bound tasks).",
+    "assessment": "Explain the need for virtual environments. Differentiate multithreading and multiprocessing and give an example of when to use each.",
+    "evaluation_rubric": {
+      "foundational": "Explain the purpose of a virtual environment.",
+      "competent": "Differentiate multithreading and multiprocessing and name the types of tasks each excels at; explain how a profiler is used to optimize code.",
+      "expert": "Discuss strategies for memory optimization in Python/Pandas; articulate best practices for dependency management across projects; discuss the Python GIL (Global Interpreter Lock) and its impact on performance."
+    }
+  },
+  {
+    "id": "prg_04",
+    "topic": "programming_and_software",
+    "subtopic": "visualization",
+    "difficulty": "foundational",
+    "explanation": "Creating informative data visualizations using Matplotlib (the foundational library) and Seaborn (a high-level statistical visualization library). Covers essential plot types for data exploration: trends (Line), distributions (Histogram, Box, Violin), relationships (Scatter, Heatmaps), and the concept of Interactive Visualization (e.g., Plotly).",
+    "assessment": "Create a scatter plot with Matplotlib and a histogram with Seaborn, correctly labeling axes and adding a title.",
+    "evaluation_rubric": {
+      "foundational": "Create a basic line and bar plot; correctly label axes; choose the appropriate plot type for simple data.",
+      "competent": "Create a scatter plot to show a relationship and a histogram to show distribution; use Seaborn for statistical plotting (e.g., box or violin plot).",
+      "expert": "Interpret a heatmap to show correlation; discuss the pros/cons of static vs. interactive visualizations; explain the concept of data ink ratio."
+    }
+  },
+  {
+    "id": "deng_01",
+    "topic": "data_engineering_and_handling",
+    "subtopic": "data_collection",
+    "difficulty": "foundational",
+    "explanation": "Understanding the types of data (Structured, Unstructured, Semi-structured). Covers common collection methods: pulling from APIs, Web Scraping, and querying storage systems (Databases: SQL & NoSQL). Distinguishes between Data Pipelines for data movement and the two primary processing methods: Batch (periodic, large volume) vs. Streaming (real-time, continuous).",
+    "assessment": "Differentiate Structured, Unstructured, and Semi-structured data with examples. Explain the difference between batch and streaming data processing.",
+    "evaluation_rubric": {
+      "foundational": "Define the three main data types; explain the core difference between SQL and NoSQL databases.",
+      "competent": "Describe how to collect data from a REST API; explain the key difference between batch and streaming data.",
+      "expert": "Provide examples of when to use SQL vs. NoSQL (e.g., OLTP vs. document store); outline the basic components of a modern data pipeline; discuss legal/ethical concerns of web scraping."
+    }
+  },
+  {
+    "id": "deng_02",
+    "topic": "data_engineering_and_handling",
+    "subtopic": "data_engineering_concepts",
+    "difficulty": "competent",
+    "explanation": "Concepts for building robust data systems. ETL vs. ELT describes data transformation order. Schema Evolution handles changes to data structure over time. Data Versioning tracks datasets used for models. Data Quality Checks ensure reliability. Slowly Changing Dimensions (SCD) addresses changes to master data (e.g., a customer's address). Feature Stores centralize feature management. Data Labeling Strategies and Human-in-the-loop systems are for creating and refining supervised data.",
+    "assessment": "Differentiate ETL and ELT. Explain why data and feature versioning are critical for ML reproducibility. Describe a Type 2 Slowly Changing Dimension.",
+    "evaluation_rubric": {
+      "foundational": "Define Data Quality Checks and Data Labeling.",
+      "competent": "Differentiate ETL and ELT; explain the concept of data versioning for ML; describe the purpose of a Feature Store.",
+      "expert": "Explain a Type 2 Slowly Changing Dimension; discuss challenges and strategies for Schema Evolution; describe how Human-in-the-loop systems improve model performance and reliability."
+    }
+  },
+  {
+    "id": "eda_01",
+    "topic": "exploratory_data_analysis",
+    "subtopic": "eda_techniques",
+    "difficulty": "foundational",
+    "explanation": "The process of analyzing data to summarize its main characteristics. Includes Data Profiling (automated summaries), Summary Statistics, and Distribution Analysis. Key steps are Outlier Detection, understanding Correlation & Causation, examining Feature Relationships, and critically, detecting Data Leakage—when information from the test/future data is inadvertently used during training, leading to overly optimistic results (especially Time-based leakage).",
+    "assessment": "Identify the difference between correlation and causation. Describe two methods for outlier detection. Give an example of time-based data leakage.",
+    "evaluation_rubric": {
+      "foundational": "Define Data Profiling; describe a method for outlier detection (e.g., IQR rule).",
+      "competent": "Explain the difference between correlation and causation; describe how to check feature relationships (e.g., scatter plots); give a simple example of data leakage.",
+      "expert": "Explain the concept of time-based data leakage in detail and how to prevent it; justify the choice of a robust summary statistic (e.g., median) over the mean in the presence of outliers."
+    }
+  },
+  {
+    "id": "dcf_01",
+    "topic": "data_cleaning_and_feature_engineering",
+    "subtopic": "data_cleaning",
+    "difficulty": "foundational",
+    "explanation": "Techniques for improving data quality. Covers different Missing Data Types (e.g., Missing Completely at Random) and corresponding Imputation Strategies (mean, median, model-based). Also includes handling Duplicate and Inconsistent data. Categorical Encoding converts text categories into numerical format (e.g., One-Hot, Label Encoding). Text Normalization prepares text data (e.g., lowercasing, stemming).",
+    "assessment": "List and explain three imputation strategies. Explain the difference between Label Encoding and One-Hot Encoding and when to use each.",
+    "evaluation_rubric": {
+      "foundational": "List three imputation strategies; define One-Hot Encoding.",
+      "competent": "Explain the difference between Label and One-Hot Encoding and when to use each; describe a strategy for handling duplicates; explain the need for text normalization.",
+      "expert": "Discuss the different types of missing data (MCAR, MAR, NMAR) and their impact on imputation strategy; explain the risk of using mean imputation."
+    }
+  },
+  {
+    "id": "dcf_02",
+    "topic": "data_cleaning_and_feature_engineering",
+    "subtopic": "feature_scaling_and_transforms",
+    "difficulty": "competent",
+    "explanation": "Transforming features to improve model performance. Feature Scaling methods like Normalization (Min-Max) and Standardization (Z-Score) ensure features contribute equally, crucial for distance-based algorithms. Log & Power Transforms (e.g., Box-Cox) make data distributions more Normal. Polynomial Features and Interaction Features create new features by combining existing ones non-linearly to increase model capacity. Binning converts continuous variables into discrete categories.",
+    "assessment": "Explain why feature scaling is necessary for K-Means and k-NN. Differentiate Normalization (Min-Max) and Standardization (Z-Score).",
+    "evaluation_rubric": {
+      "foundational": "Define Normalization and Standardization; list a model where scaling is necessary.",
+      "competent": "Explain the difference between Normalization (Min-Max) and Standardization (Z-Score) and when to use each; explain the purpose of creating polynomial and interaction features.",
+      "expert": "Explain why Standardization is generally preferred for algorithms using gradients; describe a scenario where log transforms would be appropriate; discuss the trade-offs of binning continuous variables."
+    }
+  },
+  {
+    "id": "dcf_03",
+    "topic": "data_cleaning_and_feature_engineering",
+    "subtopic": "advanced_feature_engineering",
+    "difficulty": "expert",
+    "explanation": "Advanced feature creation for specialized data types. Includes deriving features from Date-time, converting Text (e.g., TF-IDF, n-grams), and high-level image data. Target Encoding (using the target variable's mean for a category) requires careful handling of Mean Encoding Leakage Risks. Feature Hashing is for high-cardinality features. Embeddings represent sparse data (like text/categories) as dense vectors. The Curse of Dimensionality describes performance degradation with too many features, and Feature Drift is a monitoring concern where feature distributions change over time.",
+    "assessment": "Describe the risk of mean encoding leakage and a method to mitigate it. Explain the difference between a raw count vector and a TF-IDF vector. Define Feature Drift.",
+    "evaluation_rubric": {
+      "foundational": "Define the Curse of Dimensionality; explain the purpose of TF-IDF.",
+      "competent": "Describe how to prevent leakage with target/mean encoding (e.g., cross-validation); explain the concept of embeddings and why they are useful; explain the concept of Feature Drift.",
+      "expert": "Articulate the mathematical details of the Curse of Dimensionality; compare Feature Hashing to One-Hot Encoding (pros/cons); explain how to create meaningful features from a Date-time column (e.g., time since last event, day of week)."
+    }
+  },
+  {
+    "id": "cmt_01",
+    "topic": "core_machine_learning_theory",
+    "subtopic": "learning_paradigms",
+    "difficulty": "foundational",
+    "explanation": "The fundamental types of machine learning based on the training data. Supervised Learning uses labeled data to predict an output. Unsupervised Learning finds patterns in unlabeled data. Semi-supervised and Self-supervised learning leverage unlabeled data to aid supervised tasks. Reinforcement Learning trains an agent to make sequential decisions by maximizing a reward function.",
+    "assessment": "Classify three common algorithms (e.g., Linear Regression, K-Means, Q-Learning) into their correct learning paradigm. Define the key difference between supervised and unsupervised learning.",
+    "evaluation_rubric": {
+      "foundational": "Define Supervised and Unsupervised Learning; provide one example of an algorithm for each.",
+      "competent": "Define Semi-supervised, Self-supervised, and Reinforcement Learning; describe the 'label' in Supervised Learning.",
+      "expert": "Give an example of a self-supervised task (e.g., masking in BERT); explain the role of the reward function in Reinforcement Learning."
+    }
+  },
+  {
+    "id": "cmt_02",
+    "topic": "core_machine_learning_theory",
+    "subtopic": "bias_variance_theory",
+    "difficulty": "competent",
+    "explanation": "The fundamental trade-off in model complexity. The Bias-Variance Decomposition explains that the total expected test error is the sum of: Bias (error from overly simplistic assumptions, i.e., Underfitting), Variance (error from sensitivity to training data fluctuations, i.e., Overfitting), and irreducible noise. Generalization refers to a model's ability to perform well on unseen data. Overfitting Theory explains that overly complex models memorize the training data.",
+    "assessment": "Explain the Bias-Variance Trade-off in the context of model complexity. Give examples of high bias and high variance models and how to mitigate them.",
+    "evaluation_rubric": {
+      "foundational": "Define bias and variance; define overfitting and underfitting.",
+      "competent": "Explain the Bias-Variance trade-off and its visual representation (e.g., target); give two methods to mitigate overfitting and two to mitigate underfitting.",
+      "expert": "Articulate the mathematical components of the Bias-Variance Decomposition; explain why a simple model typically has high bias and low variance."
+    }
+  },
+  {
+    "id": "cmt_03",
+    "topic": "core_machine_learning_theory",
+    "subtopic": "advanced_learning_theory",
+    "difficulty": "expert",
+    "explanation": "Theoretical foundations of machine learning. Empirical Risk Minimization (ERM) minimizes the error on the training data. Structural Risk Minimization (SRM) is a framework that balances minimizing training error with minimizing model complexity. The No Free Lunch Theorem states that no single algorithm is universally the best. VC Dimension (Vapnik-Chervonenkis dimension) measures a model's capacity/complexity. PAC Learning (Probably Approximately Correct) provides a formal framework for defining successful generalization.",
+    "assessment": "Differentiate ERM and SRM. Explain the intuition behind VC Dimension. Summarize the No Free Lunch Theorem.",
+    "evaluation_rubric": {
+      "foundational": "Define ERM; explain the concept of model capacity.",
+      "competent": "Explain the intuition behind the No Free Lunch Theorem; differentiate between ERM and SRM; define the concept of Generalization.",
+      "expert": "Explain the purpose and intuition of the VC Dimension; describe the key components of the PAC learning framework; discuss how regularization relates to SRM."
+    }
+  }
+]

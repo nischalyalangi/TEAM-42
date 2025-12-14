@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)https://scikit-learn.org/stable/user_guide.html -->
+<html lang="en" data-content_root="./" data-mode="auto" data-theme="dark" class="fontawesome-i2svg-active fontawesome-i2svg-complete"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="User Guide">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://scikit-learn/stable/user_guide.html">
+<meta property="og:site_name" content="scikit-learn">
+<meta property="og:description" content="Supervised learning- Linear Models- Ordinary Least Squares, Ridge regression and classification, Lasso, Multi-task Lasso, Elastic-Net, Multi-task Elastic-Net, Least Angle Regression, LARS Lasso, Or...">
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-notext.png">
+<meta property="og:image:alt" content="scikit-learn">
+<meta name="description" content="Supervised learning- Linear Models- Ordinary Least Squares, Ridge regression and classification, Lasso, Multi-task Lasso, Elastic-Net, Multi-task Elastic-Net, Least Angle Regression, LARS Lasso, Or...">
+
+    <title>User Guide — scikit-learn 1.8.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <style type="text/css">:host,:root{--fa-font-solid:normal 900 1em/1 "Font Awesome 6 Solid";--fa-font-regular:normal 400 1em/1 "Font Awesome 6 Regular";--fa-font-light:normal 300 1em/1 "Font Awesome 6 Light";--fa-font-thin:normal 100 1em/1 "Font Awesome 6 Thin";--fa-font-duotone:normal 900 1em/1 "Font Awesome 6 Duotone";--fa-font-sharp-solid:normal 900 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-regular:normal 400 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-light:normal 300 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-thin:normal 100 1em/1 "Font Awesome 6 Sharp";--fa-font-brands:normal 400 1em/1 "Font Awesome 6 Brands"}svg:not(:host).svg-inline--fa,svg:not(:root).svg-inline--fa{overflow:visible;box-sizing:content-box}.svg-inline--fa{display:var(--fa-display,inline-block);height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-2xs{vertical-align:.1em}.svg-inline--fa.fa-xs{vertical-align:0}.svg-inline--fa.fa-sm{vertical-align:-.0714285705em}.svg-inline--fa.fa-lg{vertical-align:-.2em}.svg-inline--fa.fa-xl{vertical-align:-.25em}.svg-inline--fa.fa-2xl{vertical-align:-.3125em}.svg-inline--fa.fa-pull-left{margin-right:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-pull-right{margin-left:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-li{width:var(--fa-li-width,2em);top:.25em}.svg-inline--fa.fa-fw{width:var(--fa-fw-width,1.25em)}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:var(--fa-counter-background-color,#ff253a);border-radius:var(--fa-counter-border-radius,1em);box-sizing:border-box;color:var(--fa-inverse,#fff);line-height:var(--fa-counter-line-height,1);max-width:var(--fa-counter-max-width,5em);min-width:var(--fa-counter-min-width,1.5em);overflow:hidden;padding:var(--fa-counter-padding,.25em .5em);right:var(--fa-right,0);text-overflow:ellipsis;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-counter-scale,.25));transform:scale(var(--fa-counter-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:var(--fa-bottom,0);right:var(--fa-right,0);top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:var(--fa-bottom,0);left:var(--fa-left,0);right:auto;top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{top:var(--fa-top,0);right:var(--fa-right,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:var(--fa-left,0);right:auto;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top left;transform-origin:top left}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-2xs{font-size:.625em;line-height:.1em;vertical-align:.225em}.fa-xs{font-size:.75em;line-height:.0833333337em;vertical-align:.125em}.fa-sm{font-size:.875em;line-height:.0714285718em;vertical-align:.0535714295em}.fa-lg{font-size:1.25em;line-height:.05em;vertical-align:-.075em}.fa-xl{font-size:1.5em;line-height:.0416666682em;vertical-align:-.125em}.fa-2xl{font-size:2em;line-height:.03125em;vertical-align:-.1875em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:var(--fa-li-margin,2.5em);padding-left:0}.fa-ul>li{position:relative}.fa-li{left:calc(var(--fa-li-width,2em) * -1);position:absolute;text-align:center;width:var(--fa-li-width,2em);line-height:inherit}.fa-border{border-color:var(--fa-border-color,#eee);border-radius:var(--fa-border-radius,.1em);border-style:var(--fa-border-style,solid);border-width:var(--fa-border-width,.08em);padding:var(--fa-border-padding,.2em .25em .15em)}.fa-pull-left{float:left;margin-right:var(--fa-pull-margin,.3em)}.fa-pull-right{float:right;margin-left:var(--fa-pull-margin,.3em)}.fa-beat{-webkit-animation-name:fa-beat;animation-name:fa-beat;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-bounce{-webkit-animation-name:fa-bounce;animation-name:fa-bounce;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1))}.fa-fade{-webkit-animation-name:fa-fade;animation-name:fa-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-beat-fade{-webkit-animation-name:fa-beat-fade;animation-name:fa-beat-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-flip{-webkit-animation-name:fa-flip;animation-name:fa-flip;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-shake{-webkit-animation-name:fa-shake;animation-name:fa-shake;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,2s);animation-duration:var(--fa-animation-duration,2s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin-reverse{--fa-animation-direction:reverse}.fa-pulse,.fa-spin-pulse{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,steps(8));animation-timing-function:var(--fa-animation-timing,steps(8))}@media (prefers-reduced-motion:reduce){.fa-beat,.fa-beat-fade,.fa-bounce,.fa-fade,.fa-flip,.fa-pulse,.fa-shake,.fa-spin,.fa-spin-pulse{-webkit-animation-delay:-1ms;animation-delay:-1ms;-webkit-animation-duration:1ms;animation-duration:1ms;-webkit-animation-iteration-count:1;animation-iteration-count:1;-webkit-transition-delay:0s;transition-delay:0s;-webkit-transition-duration:0s;transition-duration:0s}}@-webkit-keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@-webkit-keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@-webkit-keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@-webkit-keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@-webkit-keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@-webkit-keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-both,.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}.fa-rotate-by{-webkit-transform:rotate(var(--fa-rotate-angle,0));transform:rotate(var(--fa-rotate-angle,0))}.fa-stack{display:inline-block;vertical-align:middle;height:2em;position:relative;width:2.5em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0;z-index:var(--fa-stack-z-index,auto)}.svg-inline--fa.fa-stack-1x{height:1em;width:1.25em}.svg-inline--fa.fa-stack-2x{height:2em;width:2.5em}.fa-inverse{color:var(--fa-inverse,#fff)}.fa-sr-only,.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.fa-sr-only-focusable:not(:focus),.sr-only-focusable:not(:focus){position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.svg-inline--fa .fa-primary{fill:var(--fa-primary-color,currentColor);opacity:var(--fa-primary-opacity,1)}.svg-inline--fa .fa-secondary{fill:var(--fa-secondary-color,currentColor);opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-primary{opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-secondary{opacity:var(--fa-primary-opacity,1)}.svg-inline--fa mask .fa-primary,.svg-inline--fa mask .fa-secondary{fill:#000}.fa-duotone.fa-inverse,.fad.fa-inverse{color:var(--fa-inverse,#fff)}</style><link href="./user_guide_files/theme.css" rel="stylesheet">
+<link href="./user_guide_files/pydata-sphinx-theme.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./user_guide_files/pygments.css">
+    <link rel="stylesheet" type="text/css" href="./user_guide_files/copybutton.css">
+    <link rel="stylesheet" type="text/css" href="./user_guide_files/plot_directive.css">
+    <link rel="stylesheet" type="text/css" href="./user_guide_files/css">
+    <link rel="stylesheet" type="text/css" href="./user_guide_files/jupyterlite_sphinx.css">
+    <link rel="stylesheet" type="text/css" href="./user_guide_files/sg_gallery.css">
+    <link rel="stylesheet" type="text/css" href="./user_guide_files/sg_gallery-binder.css">
+    <link rel="stylesheet" type="text/css" href="./user_guide_files/sg_gallery-dataframe.css">
+    <link rel="stylesheet" type="text/css" href="./user_guide_files/sg_gallery-rendered-html.css">
+    <link rel="stylesheet" type="text/css" href="./user_guide_files/sphinx-design.min.css">
+    <link rel="stylesheet" type="text/css" href="./user_guide_files/colors.css">
+    <link rel="stylesheet" type="text/css" href="./user_guide_files/custom.css">
+  
+  <!-- So that users can add custom icons -->
+  <script src="./user_guide_files/fontawesome.js.download"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="./user_guide_files/bootstrap.js.download">
+<link rel="preload" as="script" href="./user_guide_files/pydata-sphinx-theme.js.download">
+
+    <script src="./user_guide_files/documentation_options.js.download"></script>
+    <script src="./user_guide_files/doctools.js.download"></script>
+    <script src="./user_guide_files/sphinx_highlight.js.download"></script>
+    <script src="./user_guide_files/clipboard.min.js.download"></script>
+    <script src="./user_guide_files/copybutton.js.download"></script>
+    <script src="./user_guide_files/jupyterlite_sphinx.js.download"></script>
+    <script src="./user_guide_files/design-tabs.js.download"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="./user_guide_files/script.js.download"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.8.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            true;
+        </script>
+    <script src="./user_guide_files/dropdown.js.download"></script>
+    <script src="./user_guide_files/version-switcher.js.download"></script>
+    <script src="./user_guide_files/sg_plotly_resize.js.download"></script>
+    <script src="./user_guide_files/theme-observer.js.download"></script>
+    <link rel="canonical" href="https://scikit-learn.org/stable/user_guide.html">
+    <link rel="icon" href="https://scikit-learn.org/stable/_static/favicon.ico">
+    <link rel="author" title="About these documents" href="https://scikit-learn.org/stable/about.html">
+    <link rel="search" title="Search" href="https://scikit-learn.org/stable/search.html">
+    <link rel="next" title="1. Supervised learning" href="https://scikit-learn.org/stable/supervised_learning.html">
+    <link rel="prev" title="Installing scikit-learn" href="https://scikit-learn.org/stable/install.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="docsearch:language" content="en">
+  <meta name="docsearch:version" content="1.8">
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="https://scikit-learn.org/stable/user_guide.html#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <svg class="svg-inline--fa fa-arrow-up" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"></path></svg><!-- <i class="fa-solid fa-arrow-up"></i> Font Awesome fontawesome.com -->Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center" action="https://scikit-learn.org/stable/search.html" method="get">
+  <svg class="svg-inline--fa fa-magnifying-glass" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass"></i> Font Awesome fontawesome.com -->
+  <input type="search" class="form-control" name="q" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer" style="height: auto;">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <svg class="svg-inline--fa fa-bars" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg><!-- <span class="fa-solid fa-bars"></span> Font Awesome fontawesome.com -->
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="https://scikit-learn.org/stable/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="./user_guide_files/scikit-learn-logo-without-subtitle.svg" class="logo__image only-light" alt="scikit-learn homepage">
+    <img src="./user_guide_files/scikit-learn-logo-without-subtitle.svg" class="logo__image only-dark pst-js-only" alt="scikit-learn homepage">
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://scikit-learn.org/stable/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="https://scikit-learn.org/stable/user_guide.html#">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://scikit-learn.org/stable/api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://scikit-learn.org/stable/auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu dropdown-menu-dark">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="https://scikit-learn.org/stable/getting_started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="https://scikit-learn.org/stable/whats_new.html">
+    Release History
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="https://scikit-learn.org/stable/glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="https://scikit-learn.org/stable/faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="https://scikit-learn.org/stable/support.html">
+    Support
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="https://scikit-learn.org/stable/related_projects.html">
+    Related Projects
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="https://scikit-learn.org/stable/roadmap.html">
+    Roadmap
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="https://scikit-learn.org/stable/governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="https://scikit-learn.org/stable/about.html">
+    About us
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bs-original-title="Search">
+    <svg class="svg-inline--fa fa-magnifying-glass fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass fa-lg"></i> Font Awesome fontawesome.com -->
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <svg class="svg-inline--fa fa-sun theme-switch fa-lg" data-mode="light" aria-labelledby="svg-inline--fa-title-QgWUS4QV5Vxo" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-QgWUS4QV5Vxo">Light</title><path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path></svg><!-- <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-moon theme-switch fa-lg" data-mode="dark" aria-labelledby="svg-inline--fa-title-CYBgOs1oIDwT" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><title id="svg-inline--fa-title-CYBgOs1oIDwT">Dark</title><path fill="currentColor" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg><!-- <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark" title="Dark"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-circle-half-stroke theme-switch fa-lg" data-mode="auto" aria-labelledby="svg-inline--fa-title-UU3Dwmqc5VXj" data-prefix="fas" data-icon="circle-half-stroke" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-UU3Dwmqc5VXj">System Settings</title><path fill="currentColor" d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg><!-- <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i> Font Awesome fontawesome.com -->
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="GitHub"><svg class="svg-inline--fa fa-square-github fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 96c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96zM265.8 407.7c0-1.8 0-6 .1-11.6c.1-11.4 .1-28.8 .1-43.7c0-15.6-5.2-25.5-11.3-30.7c37-4.1 76-9.2 76-73.1c0-18.2-6.5-27.3-17.1-39c1.7-4.3 7.4-22-1.7-45c-13.9-4.3-45.7 17.9-45.7 17.9c-13.2-3.7-27.5-5.6-41.6-5.6s-28.4 1.9-41.6 5.6c0 0-31.8-22.2-45.7-17.9c-9.1 22.9-3.5 40.6-1.7 45c-10.6 11.7-15.6 20.8-15.6 39c0 63.6 37.3 69 74.3 73.1c-4.8 4.3-9.1 11.7-10.6 22.3c-9.5 4.3-33.8 11.7-48.3-13.9c-9.1-15.8-25.5-17.1-25.5-17.1c-16.2-.2-1.1 10.2-1.1 10.2c10.8 5 18.4 24.2 18.4 24.2c9.7 29.7 56.1 19.7 56.1 19.7c0 9 .1 21.7 .1 30.6c0 4.8 .1 8.6 .1 10c0 4.3-3 9.5-11.5 8C106 393.6 59.8 330.8 59.8 257.4c0-91.8 70.2-161.5 162-161.5s166.2 69.7 166.2 161.5c.1 73.4-44.7 136.3-110.7 158.3c-8.4 1.5-11.5-3.7-11.5-8zm-90.5-54.8c-.2-1.5 1.1-2.8 3-3.2c1.9-.2 3.7 .6 3.9 1.9c.3 1.3-1 2.6-3 3c-1.9 .4-3.7-.4-3.9-1.7zm-9.1 3.2c-2.2 .2-3.7-.9-3.7-2.4c0-1.3 1.5-2.4 3.5-2.4c1.9-.2 3.7 .9 3.7 2.4c0 1.3-1.5 2.4-3.5 2.4zm-14.3-2.2c-1.9-.4-3.2-1.9-2.8-3.2s2.4-1.9 4.1-1.5c2 .6 3.3 2.1 2.8 3.4c-.4 1.3-2.4 1.9-4.1 1.3zm-12.5-7.3c-1.5-1.3-1.9-3.2-.9-4.1c.9-1.1 2.8-.9 4.3 .6c1.3 1.3 1.8 3.3 .9 4.1c-.9 1.1-2.8 .9-4.3-.6zm-8.5-10c-1.1-1.5-1.1-3.2 0-3.9c1.1-.9 2.8-.2 3.7 1.3c1.1 1.5 1.1 3.3 0 4.1c-.9 .6-2.6 0-3.7-1.5zm-6.3-8.8c-1.1-1.3-1.3-2.8-.4-3.5c.9-.9 2.4-.4 3.5 .6c1.1 1.3 1.3 2.8 .4 3.5c-.9 .9-2.4 .4-3.5-.6zm-6-6.4c-1.3-.6-1.9-1.7-1.5-2.6c.4-.6 1.5-.9 2.8-.4c1.3 .7 1.9 1.8 1.5 2.6c-.4 .9-1.7 1.1-2.8 .4z"></path></svg><!-- <i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2" type="button" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-controls="pst-version-switcher-list-2" aria-label="Version switcher list" data-active-version-name="1.8.0 (stable)" data-active-version="1.8.0">1.8.0 (stable)</button>
+  <div id="pst-version-switcher-list-2" class="version-switcher__menu dropdown-menu list-group-flush py-0 dropdown-menu-dark" role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  <a class="dropdown-item list-group-item list-group-item-action py-1" href="https://scikit-learn.org/dev/user_guide.html" role="option" data-version-name="1.9.dev0 (dev)" data-version="1.9.dev0"><span>1.9.dev0 (dev)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://scikit-learn.org/stable/user_guide.html" role="option" data-version-name="1.8.0 (stable)" data-version="1.8.0"><span>1.8.0 (stable)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://scikit-learn.org/1.7/user_guide.html" role="option" data-version-name="1.7.2" data-version="1.7.2"><span>1.7.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://scikit-learn.org/1.6/user_guide.html" role="option" data-version-name="1.6.1" data-version="1.6.1"><span>1.6.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://scikit-learn.org/1.5/user_guide.html" role="option" data-version-name="1.5.2" data-version="1.5.2"><span>1.5.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://scikit-learn.org/1.4/user_guide.html" role="option" data-version-name="1.4.2" data-version="1.4.2"><span>1.4.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://scikit-learn.org/1.3/user_guide.html" role="option" data-version-name="1.3.2" data-version="1.3.2"><span>1.3.2</span></a></div>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bs-original-title="Search">
+    <svg class="svg-inline--fa fa-magnifying-glass fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass fa-lg"></i> Font Awesome fontawesome.com -->
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <svg class="svg-inline--fa fa-outdent" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="outdent" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 64C0 46.3 14.3 32 32 32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64zM192 192c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32zm32 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32zM0 448c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM.2 268.6c-8.2-6.4-8.2-18.9 0-25.3l101.9-79.3c10.5-8.2 25.8-.7 25.8 12.6V335.3c0 13.3-15.3 20.8-25.8 12.6L.2 268.6z"></path></svg><!-- <span class="fa-solid fa-outdent"></span> Font Awesome fontawesome.com -->
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://scikit-learn.org/stable/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="https://scikit-learn.org/stable/user_guide.html#">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://scikit-learn.org/stable/api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://scikit-learn.org/stable/auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://scikit-learn.org/stable/getting_started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://scikit-learn.org/stable/whats_new.html">
+    Release History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://scikit-learn.org/stable/glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://scikit-learn.org/stable/faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://scikit-learn.org/stable/support.html">
+    Support
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://scikit-learn.org/stable/related_projects.html">
+    Related Projects
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://scikit-learn.org/stable/roadmap.html">
+    Roadmap
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://scikit-learn.org/stable/governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://scikit-learn.org/stable/about.html">
+    About us
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <svg class="svg-inline--fa fa-sun theme-switch fa-lg" data-mode="light" aria-labelledby="svg-inline--fa-title-TB8OdiS8F3zH" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-TB8OdiS8F3zH">Light</title><path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path></svg><!-- <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-moon theme-switch fa-lg" data-mode="dark" aria-labelledby="svg-inline--fa-title-IF56tWPH1sjI" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><title id="svg-inline--fa-title-IF56tWPH1sjI">Dark</title><path fill="currentColor" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg><!-- <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark" title="Dark"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-circle-half-stroke theme-switch fa-lg" data-mode="auto" aria-labelledby="svg-inline--fa-title-ymesco8fwRgR" data-prefix="fas" data-icon="circle-half-stroke" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-ymesco8fwRgR">System Settings</title><path fill="currentColor" d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg><!-- <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i> Font Awesome fontawesome.com -->
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="GitHub"><svg class="svg-inline--fa fa-square-github fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 96c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96zM265.8 407.7c0-1.8 0-6 .1-11.6c.1-11.4 .1-28.8 .1-43.7c0-15.6-5.2-25.5-11.3-30.7c37-4.1 76-9.2 76-73.1c0-18.2-6.5-27.3-17.1-39c1.7-4.3 7.4-22-1.7-45c-13.9-4.3-45.7 17.9-45.7 17.9c-13.2-3.7-27.5-5.6-41.6-5.6s-28.4 1.9-41.6 5.6c0 0-31.8-22.2-45.7-17.9c-9.1 22.9-3.5 40.6-1.7 45c-10.6 11.7-15.6 20.8-15.6 39c0 63.6 37.3 69 74.3 73.1c-4.8 4.3-9.1 11.7-10.6 22.3c-9.5 4.3-33.8 11.7-48.3-13.9c-9.1-15.8-25.5-17.1-25.5-17.1c-16.2-.2-1.1 10.2-1.1 10.2c10.8 5 18.4 24.2 18.4 24.2c9.7 29.7 56.1 19.7 56.1 19.7c0 9 .1 21.7 .1 30.6c0 4.8 .1 8.6 .1 10c0 4.3-3 9.5-11.5 8C106 393.6 59.8 330.8 59.8 257.4c0-91.8 70.2-161.5 162-161.5s166.2 69.7 166.2 161.5c.1 73.4-44.7 136.3-110.7 158.3c-8.4 1.5-11.5-3.7-11.5-8zm-90.5-54.8c-.2-1.5 1.1-2.8 3-3.2c1.9-.2 3.7 .6 3.9 1.9c.3 1.3-1 2.6-3 3c-1.9 .4-3.7-.4-3.9-1.7zm-9.1 3.2c-2.2 .2-3.7-.9-3.7-2.4c0-1.3 1.5-2.4 3.5-2.4c1.9-.2 3.7 .9 3.7 2.4c0 1.3-1.5 2.4-3.5 2.4zm-14.3-2.2c-1.9-.4-3.2-1.9-2.8-3.2s2.4-1.9 4.1-1.5c2 .6 3.3 2.1 2.8 3.4c-.4 1.3-2.4 1.9-4.1 1.3zm-12.5-7.3c-1.5-1.3-1.9-3.2-.9-4.1c.9-1.1 2.8-.9 4.3 .6c1.3 1.3 1.8 3.3 .9 4.1c-.9 1.1-2.8 .9-4.3-.6zm-8.5-10c-1.1-1.5-1.1-3.2 0-3.9c1.1-.9 2.8-.2 3.7 1.3c1.1 1.5 1.1 3.3 0 4.1c-.9 .6-2.6 0-3.7-1.5zm-6.3-8.8c-1.1-1.3-1.3-2.8-.4-3.5c.9-.9 2.4-.4 3.5 .6c1.1 1.3 1.3 2.8 .4 3.5c-.9 .9-2.4 .4-3.5-.6zm-6-6.4c-1.3-.6-1.9-1.7-1.5-2.6c.4-.6 1.5-.9 2.8-.4c1.3 .7 1.9 1.8 1.5 2.6c-.4 .9-1.7 1.1-2.8 .4z"></path></svg><!-- <i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3" type="button" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-controls="pst-version-switcher-list-3" aria-label="Version switcher list" data-active-version-name="1.8.0 (stable)" data-active-version="1.8.0">1.8.0 (stable)</button>
+  <div id="pst-version-switcher-list-3" class="version-switcher__menu dropdown-menu list-group-flush py-0 dropdown-menu-dark" role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  <a class="dropdown-item list-group-item list-group-item-action py-1" href="https://scikit-learn.org/dev/user_guide.html" role="option" data-version-name="1.9.dev0 (dev)" data-version="1.9.dev0"><span>1.9.dev0 (dev)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://scikit-learn.org/stable/user_guide.html" role="option" data-version-name="1.8.0 (stable)" data-version="1.8.0"><span>1.8.0 (stable)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://scikit-learn.org/1.7/user_guide.html" role="option" data-version-name="1.7.2" data-version="1.7.2"><span>1.7.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://scikit-learn.org/1.6/user_guide.html" role="option" data-version-name="1.6.1" data-version="1.6.1"><span>1.6.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://scikit-learn.org/1.5/user_guide.html" role="option" data-version-name="1.5.2" data-version="1.5.2"><span>1.5.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://scikit-learn.org/1.4/user_guide.html" role="option" data-version-name="1.4.2" data-version="1.4.2"><span>1.4.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://scikit-learn.org/1.3/user_guide.html" role="option" data-version-name="1.3.2" data-version="1.3.2"><span>1.3.2</span></a></div>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links" aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://scikit-learn.org/stable/supervised_learning.html">1. Supervised learning</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/linear_model.html">1.1. Linear Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/lda_qda.html">1.2. Linear and Quadratic Discriminant Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/kernel_ridge.html">1.3. Kernel ridge regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/svm.html">1.4. Support Vector Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/sgd.html">1.5. Stochastic Gradient Descent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neighbors.html">1.6. Nearest Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/gaussian_process.html">1.7. Gaussian Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/cross_decomposition.html">1.8. Cross decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/naive_bayes.html">1.9. Naive Bayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/tree.html">1.10. Decision Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/ensemble.html">1.11. Ensembles: Gradient boosting, random forests, bagging, voting, stacking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/multiclass.html">1.12. Multiclass and multioutput algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/feature_selection.html">1.13. Feature selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/semi_supervised.html">1.14. Semi-supervised learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/isotonic.html">1.15. Isotonic regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/calibration.html">1.16. Probability calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neural_networks_supervised.html">1.17. Neural network models (supervised)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://scikit-learn.org/stable/unsupervised_learning.html">2. Unsupervised learning</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/mixture.html">2.1. Gaussian mixture models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/manifold.html">2.2. Manifold learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/clustering.html">2.3. Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/biclustering.html">2.4. Biclustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/decomposition.html">2.5. Decomposing signals in components (matrix factorization problems)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/covariance.html">2.6. Covariance estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/outlier_detection.html">2.7. Novelty and Outlier Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/density.html">2.8. Density Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neural_networks_unsupervised.html">2.9. Neural network models (unsupervised)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://scikit-learn.org/stable/model_selection.html">3. Model selection and evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/cross_validation.html">3.1. Cross-validation: evaluating estimator performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/grid_search.html">3.2. Tuning the hyper-parameters of an estimator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/classification_threshold.html">3.3. Tuning the decision threshold for class prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/model_evaluation.html">3.4. Metrics and scoring: quantifying the quality of predictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/learning_curve.html">3.5. Validation curves: plotting scores to evaluate models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/metadata_routing.html">4. Metadata Routing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://scikit-learn.org/stable/inspection.html">5. Inspection</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/partial_dependence.html">5.1. Partial Dependence and Individual Conditional Expectation plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/permutation_importance.html">5.2. Permutation feature importance</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/visualizations.html">6. Visualizations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://scikit-learn.org/stable/data_transforms.html">7. Dataset transformations</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/compose.html">7.1. Pipelines and composite estimators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/feature_extraction.html">7.2. Feature extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/preprocessing.html">7.3. Preprocessing data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/impute.html">7.4. Imputation of missing values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/unsupervised_reduction.html">7.5. Unsupervised dimensionality reduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/random_projection.html">7.6. Random Projection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/kernel_approximation.html">7.7. Kernel Approximation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/metrics.html">7.8. Pairwise metrics, Affinities and Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/preprocessing_targets.html">7.9. Transforming the prediction target (<code class="docutils literal notranslate"><span class="pre">y</span></code>)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://scikit-learn.org/stable/datasets.html">8. Dataset loading utilities</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/toy_dataset.html">8.1. Toy datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/real_world.html">8.2. Real world datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/sample_generators.html">8.3. Generated datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/loading_other_datasets.html">8.4. Loading other datasets</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://scikit-learn.org/stable/computing.html">9. Computing with scikit-learn</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/computing/scaling_strategies.html">9.1. Strategies to scale computationally: bigger data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/computing/computational_performance.html">9.2. Computational Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/computing/parallelism.html">9.3. Parallelism, resource management, and configuration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/model_persistence.html">10. Model persistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/common_pitfalls.html">11. Common pitfalls and recommended practices</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://scikit-learn.org/stable/dispatching.html">12. Dispatching</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/array_api.html">12.1. Array API support (experimental)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/machine_learning_map.html">13. Choosing the right estimator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/presentations.html">14. External Resources, Videos and Talks</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://scikit-learn.org/stable/index.html" class="nav-link" aria-label="Home">
+        <svg class="svg-inline--fa fa-house" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="house" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"></path></svg><!-- <i class="fa-solid fa-home"></i> Font Awesome fontawesome.com -->
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">User Guide</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="user-guide">
+<span id="id1"></span><h1>User Guide<a class="headerlink" href="https://scikit-learn.org/stable/user_guide.html#user-guide" title="Link to this heading">#</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/supervised_learning.html">1. Supervised learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/linear_model.html">1.1. Linear Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares">1.1.1. Ordinary Least Squares</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification">1.1.2. Ridge regression and classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/linear_model.html#lasso">1.1.3. Lasso</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/linear_model.html#multi-task-lasso">1.1.4. Multi-task Lasso</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/linear_model.html#elastic-net">1.1.5. Elastic-Net</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/linear_model.html#multi-task-elastic-net">1.1.6. Multi-task Elastic-Net</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/linear_model.html#least-angle-regression">1.1.7. Least Angle Regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/linear_model.html#lars-lasso">1.1.8. LARS Lasso</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/linear_model.html#orthogonal-matching-pursuit-omp">1.1.9. Orthogonal Matching Pursuit (OMP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/linear_model.html#bayesian-regression">1.1.10. Bayesian Regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression">1.1.11. Logistic regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/linear_model.html#generalized-linear-models">1.1.12. Generalized Linear Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/linear_model.html#stochastic-gradient-descent-sgd">1.1.13. Stochastic Gradient Descent - SGD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/linear_model.html#robustness-regression-outliers-and-modeling-errors">1.1.14. Robustness regression: outliers and modeling errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/linear_model.html#quantile-regression">1.1.15. Quantile Regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/linear_model.html#polynomial-regression-extending-linear-models-with-basis-functions">1.1.16. Polynomial regression: extending linear models with basis functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/lda_qda.html">1.2. Linear and Quadratic Discriminant Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/lda_qda.html#dimensionality-reduction-using-linear-discriminant-analysis">1.2.1. Dimensionality reduction using Linear Discriminant Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/lda_qda.html#mathematical-formulation-of-the-lda-and-qda-classifiers">1.2.2. Mathematical formulation of the LDA and QDA classifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/lda_qda.html#mathematical-formulation-of-lda-dimensionality-reduction">1.2.3. Mathematical formulation of LDA dimensionality reduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/lda_qda.html#shrinkage-and-covariance-estimator">1.2.4. Shrinkage and Covariance Estimator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/lda_qda.html#estimation-algorithms">1.2.5. Estimation algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/kernel_ridge.html">1.3. Kernel ridge regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/svm.html">1.4. Support Vector Machines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/svm.html#classification">1.4.1. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/svm.html#regression">1.4.2. Regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/svm.html#density-estimation-novelty-detection">1.4.3. Density estimation, novelty detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/svm.html#complexity">1.4.4. Complexity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/svm.html#tips-on-practical-use">1.4.5. Tips on Practical Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/svm.html#kernel-functions">1.4.6. Kernel functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/svm.html#mathematical-formulation">1.4.7. Mathematical formulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/svm.html#implementation-details">1.4.8. Implementation details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/sgd.html">1.5. Stochastic Gradient Descent</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/sgd.html#classification">1.5.1. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/sgd.html#regression">1.5.2. Regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/sgd.html#online-one-class-svm">1.5.3. Online One-Class SVM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/sgd.html#stochastic-gradient-descent-for-sparse-data">1.5.4. Stochastic Gradient Descent for sparse data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/sgd.html#complexity">1.5.5. Complexity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/sgd.html#stopping-criterion">1.5.6. Stopping criterion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/sgd.html#tips-on-practical-use">1.5.7. Tips on Practical Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/sgd.html#mathematical-formulation">1.5.8. Mathematical formulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/sgd.html#implementation-details">1.5.9. Implementation details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neighbors.html">1.6. Nearest Neighbors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neighbors.html#unsupervised-nearest-neighbors">1.6.1. Unsupervised Nearest Neighbors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbors-classification">1.6.2. Nearest Neighbors Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbors-regression">1.6.3. Nearest Neighbors Regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbor-algorithms">1.6.4. Nearest Neighbor Algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neighbors.html#nearest-centroid-classifier">1.6.5. Nearest Centroid Classifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbors-transformer">1.6.6. Nearest Neighbors Transformer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neighbors.html#neighborhood-components-analysis">1.6.7. Neighborhood Components Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/gaussian_process.html">1.7. Gaussian Processes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/gaussian_process.html#gaussian-process-regression-gpr">1.7.1. Gaussian Process Regression (GPR)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/gaussian_process.html#gaussian-process-classification-gpc">1.7.2. Gaussian Process Classification (GPC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/gaussian_process.html#gpc-examples">1.7.3. GPC examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/gaussian_process.html#kernels-for-gaussian-processes">1.7.4. Kernels for Gaussian Processes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/cross_decomposition.html">1.8. Cross decomposition</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/cross_decomposition.html#plscanonical">1.8.1. PLSCanonical</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/cross_decomposition.html#plssvd">1.8.2. PLSSVD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/cross_decomposition.html#plsregression">1.8.3. PLSRegression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/cross_decomposition.html#canonical-correlation-analysis">1.8.4. Canonical Correlation Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/naive_bayes.html">1.9. Naive Bayes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/naive_bayes.html#gaussian-naive-bayes">1.9.1. Gaussian Naive Bayes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/naive_bayes.html#multinomial-naive-bayes">1.9.2. Multinomial Naive Bayes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/naive_bayes.html#complement-naive-bayes">1.9.3. Complement Naive Bayes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/naive_bayes.html#bernoulli-naive-bayes">1.9.4. Bernoulli Naive Bayes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/naive_bayes.html#categorical-naive-bayes">1.9.5. Categorical Naive Bayes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/naive_bayes.html#out-of-core-naive-bayes-model-fitting">1.9.6. Out-of-core naive Bayes model fitting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/tree.html">1.10. Decision Trees</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/tree.html#classification">1.10.1. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/tree.html#regression">1.10.2. Regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/tree.html#multi-output-problems">1.10.3. Multi-output problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/tree.html#complexity">1.10.4. Complexity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/tree.html#tips-on-practical-use">1.10.5. Tips on practical use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/tree.html#tree-algorithms-id3-c4-5-c5-0-and-cart">1.10.6. Tree algorithms: ID3, C4.5, C5.0 and CART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/tree.html#mathematical-formulation">1.10.7. Mathematical formulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/tree.html#missing-values-support">1.10.8. Missing Values Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/tree.html#minimal-cost-complexity-pruning">1.10.9. Minimal Cost-Complexity Pruning</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/ensemble.html">1.11. Ensembles: Gradient boosting, random forests, bagging, voting, stacking</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/ensemble.html#gradient-boosted-trees">1.11.1. Gradient-boosted trees</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/ensemble.html#random-forests-and-other-randomized-tree-ensembles">1.11.2. Random forests and other randomized tree ensembles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/ensemble.html#bagging-meta-estimator">1.11.3. Bagging meta-estimator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/ensemble.html#voting-classifier">1.11.4. Voting Classifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/ensemble.html#voting-regressor">1.11.5. Voting Regressor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/ensemble.html#stacked-generalization">1.11.6. Stacked generalization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/ensemble.html#adaboost">1.11.7. AdaBoost</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/multiclass.html">1.12. Multiclass and multioutput algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/multiclass.html#multiclass-classification">1.12.1. Multiclass classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/multiclass.html#multilabel-classification">1.12.2. Multilabel classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/multiclass.html#multiclass-multioutput-classification">1.12.3. Multiclass-multioutput classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/multiclass.html#multioutput-regression">1.12.4. Multioutput regression</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/feature_selection.html">1.13. Feature selection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/feature_selection.html#removing-features-with-low-variance">1.13.1. Removing features with low variance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/feature_selection.html#univariate-feature-selection">1.13.2. Univariate feature selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/feature_selection.html#recursive-feature-elimination">1.13.3. Recursive feature elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/feature_selection.html#feature-selection-using-selectfrommodel">1.13.4. Feature selection using SelectFromModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/feature_selection.html#sequential-feature-selection">1.13.5. Sequential Feature Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/feature_selection.html#feature-selection-as-part-of-a-pipeline">1.13.6. Feature selection as part of a pipeline</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/semi_supervised.html">1.14. Semi-supervised learning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/semi_supervised.html#self-training">1.14.1. Self Training</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/semi_supervised.html#label-propagation">1.14.2. Label Propagation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/isotonic.html">1.15. Isotonic regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/calibration.html">1.16. Probability calibration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/calibration.html#calibration-curves">1.16.1. Calibration curves</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/calibration.html#calibrating-a-classifier">1.16.2. Calibrating a classifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/calibration.html#usage">1.16.3. Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neural_networks_supervised.html">1.17. Neural network models (supervised)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neural_networks_supervised.html#multi-layer-perceptron">1.17.1. Multi-layer Perceptron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification">1.17.2. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neural_networks_supervised.html#regression">1.17.3. Regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neural_networks_supervised.html#regularization">1.17.4. Regularization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neural_networks_supervised.html#algorithms">1.17.5. Algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neural_networks_supervised.html#complexity">1.17.6. Complexity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neural_networks_supervised.html#tips-on-practical-use">1.17.7. Tips on Practical Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neural_networks_supervised.html#more-control-with-warm-start">1.17.8. More control with warm_start</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/unsupervised_learning.html">2. Unsupervised learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/mixture.html">2.1. Gaussian mixture models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/mixture.html#gaussian-mixture">2.1.1. Gaussian Mixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/mixture.html#variational-bayesian-gaussian-mixture">2.1.2. Variational Bayesian Gaussian Mixture</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/manifold.html">2.2. Manifold learning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/manifold.html#introduction">2.2.1. Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/manifold.html#isomap">2.2.2. Isomap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/manifold.html#locally-linear-embedding">2.2.3. Locally Linear Embedding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/manifold.html#modified-locally-linear-embedding">2.2.4. Modified Locally Linear Embedding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/manifold.html#hessian-eigenmapping">2.2.5. Hessian Eigenmapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/manifold.html#spectral-embedding">2.2.6. Spectral Embedding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/manifold.html#local-tangent-space-alignment">2.2.7. Local Tangent Space Alignment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/manifold.html#multi-dimensional-scaling-mds">2.2.8. Multi-dimensional Scaling (MDS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/manifold.html#t-distributed-stochastic-neighbor-embedding-t-sne">2.2.9. t-distributed Stochastic Neighbor Embedding (t-SNE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/manifold.html#tips-on-practical-use">2.2.10. Tips on practical use</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/clustering.html">2.3. Clustering</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/clustering.html#overview-of-clustering-methods">2.3.1. Overview of clustering methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/clustering.html#k-means">2.3.2. K-means</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/clustering.html#affinity-propagation">2.3.3. Affinity Propagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/clustering.html#mean-shift">2.3.4. Mean Shift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/clustering.html#spectral-clustering">2.3.5. Spectral clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/clustering.html#hierarchical-clustering">2.3.6. Hierarchical clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/clustering.html#dbscan">2.3.7. DBSCAN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/clustering.html#hdbscan">2.3.8. HDBSCAN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/clustering.html#optics">2.3.9. OPTICS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/clustering.html#birch">2.3.10. BIRCH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/clustering.html#clustering-performance-evaluation">2.3.11. Clustering performance evaluation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/biclustering.html">2.4. Biclustering</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/biclustering.html#spectral-co-clustering">2.4.1. Spectral Co-Clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/biclustering.html#spectral-biclustering">2.4.2. Spectral Biclustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/biclustering.html#biclustering-evaluation">2.4.3. Biclustering evaluation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/decomposition.html">2.5. Decomposing signals in components (matrix factorization problems)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/decomposition.html#principal-component-analysis-pca">2.5.1. Principal component analysis (PCA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/decomposition.html#kernel-principal-component-analysis-kpca">2.5.2. Kernel Principal Component Analysis (kPCA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/decomposition.html#truncated-singular-value-decomposition-and-latent-semantic-analysis">2.5.3. Truncated singular value decomposition and latent semantic analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/decomposition.html#dictionary-learning">2.5.4. Dictionary Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/decomposition.html#factor-analysis">2.5.5. Factor Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/decomposition.html#independent-component-analysis-ica">2.5.6. Independent component analysis (ICA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/decomposition.html#non-negative-matrix-factorization-nmf-or-nnmf">2.5.7. Non-negative matrix factorization (NMF or NNMF)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/decomposition.html#latent-dirichlet-allocation-lda">2.5.8. Latent Dirichlet Allocation (LDA)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/covariance.html">2.6. Covariance estimation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/covariance.html#empirical-covariance">2.6.1. Empirical covariance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/covariance.html#shrunk-covariance">2.6.2. Shrunk Covariance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/covariance.html#sparse-inverse-covariance">2.6.3. Sparse inverse covariance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/covariance.html#robust-covariance-estimation">2.6.4. Robust Covariance Estimation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/outlier_detection.html">2.7. Novelty and Outlier Detection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/outlier_detection.html#overview-of-outlier-detection-methods">2.7.1. Overview of outlier detection methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/outlier_detection.html#novelty-detection">2.7.2. Novelty Detection</a></li>
+<li class="toctree-l3"><a class="reference internal active" href="https://scikit-learn.org/stable/modules/outlier_detection.html#id1">2.7.3. Outlier Detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/outlier_detection.html#novelty-detection-with-local-outlier-factor">2.7.4. Novelty detection with Local Outlier Factor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/density.html">2.8. Density Estimation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/density.html#density-estimation-histograms">2.8.1. Density Estimation: Histograms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/density.html#kernel-density-estimation">2.8.2. Kernel Density Estimation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neural_networks_unsupervised.html">2.9. Neural network models (unsupervised)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/neural_networks_unsupervised.html#restricted-boltzmann-machines">2.9.1. Restricted Boltzmann machines</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/model_selection.html">3. Model selection and evaluation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/cross_validation.html">3.1. Cross-validation: evaluating estimator performance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/cross_validation.html#computing-cross-validated-metrics">3.1.1. Computing cross-validated metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators">3.1.2. Cross validation iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/cross_validation.html#a-note-on-shuffling">3.1.3. A note on shuffling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-and-model-selection">3.1.4. Cross validation and model selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/cross_validation.html#permutation-test-score">3.1.5. Permutation test score</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/grid_search.html">3.2. Tuning the hyper-parameters of an estimator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/grid_search.html#exhaustive-grid-search">3.2.1. Exhaustive Grid Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/grid_search.html#randomized-parameter-optimization">3.2.2. Randomized Parameter Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/grid_search.html#searching-for-optimal-parameters-with-successive-halving">3.2.3. Searching for optimal parameters with successive halving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/grid_search.html#tips-for-parameter-search">3.2.4. Tips for parameter search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/grid_search.html#alternatives-to-brute-force-parameter-search">3.2.5. Alternatives to brute force parameter search</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/classification_threshold.html">3.3. Tuning the decision threshold for class prediction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/classification_threshold.html#post-tuning-the-decision-threshold">3.3.1. Post-tuning the decision threshold</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/model_evaluation.html">3.4. Metrics and scoring: quantifying the quality of predictions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/model_evaluation.html#which-scoring-function-should-i-use">3.4.1. Which scoring function should I use?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-api-overview">3.4.2. Scoring API overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/model_evaluation.html#the-scoring-parameter-defining-model-evaluation-rules">3.4.3. The <code class="docutils literal notranslate"><span class="pre">scoring</span></code> parameter: defining model evaluation rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics">3.4.4. Classification metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/model_evaluation.html#multilabel-ranking-metrics">3.4.5. Multilabel ranking metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/model_evaluation.html#regression-metrics">3.4.6. Regression metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/model_evaluation.html#clustering-metrics">3.4.7. Clustering metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/model_evaluation.html#dummy-estimators">3.4.8. Dummy estimators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/learning_curve.html">3.5. Validation curves: plotting scores to evaluate models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/learning_curve.html#validation-curve">3.5.1. Validation curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/learning_curve.html#learning-curve">3.5.2. Learning curve</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/metadata_routing.html">4. Metadata Routing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/metadata_routing.html#usage-examples">4.1. Usage Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/metadata_routing.html#weighted-scoring-and-fitting">4.1.1. Weighted scoring and fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/metadata_routing.html#weighted-scoring-and-unweighted-fitting">4.1.2. Weighted scoring and unweighted fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/metadata_routing.html#unweighted-feature-selection">4.1.3. Unweighted feature selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/metadata_routing.html#different-scoring-and-fitting-weights">4.1.4. Different scoring and fitting weights</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/metadata_routing.html#api-interface">4.2. API Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/metadata_routing.html#metadata-routing-support-status">4.3. Metadata Routing Support Status</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/inspection.html">5. Inspection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/partial_dependence.html">5.1. Partial Dependence and Individual Conditional Expectation plots</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/partial_dependence.html#partial-dependence-plots">5.1.1. Partial dependence plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/partial_dependence.html#individual-conditional-expectation-ice-plot">5.1.2. Individual conditional expectation (ICE) plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/partial_dependence.html#mathematical-definition">5.1.3. Mathematical Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/partial_dependence.html#computation-methods">5.1.4. Computation methods</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/permutation_importance.html">5.2. Permutation feature importance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/permutation_importance.html#outline-of-the-permutation-importance-algorithm">5.2.1. Outline of the permutation importance algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/permutation_importance.html#relation-to-impurity-based-importance-in-trees">5.2.2. Relation to impurity-based importance in trees</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/permutation_importance.html#misleading-values-on-strongly-correlated-features">5.2.3. Misleading values on strongly correlated features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/visualizations.html">6. Visualizations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/visualizations.html#available-plotting-utilities">6.1. Available Plotting Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/visualizations.html#display-objects">6.1.1. Display Objects</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/data_transforms.html">7. Dataset transformations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/compose.html">7.1. Pipelines and composite estimators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/compose.html#pipeline-chaining-estimators">7.1.1. Pipeline: chaining estimators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/compose.html#transforming-target-in-regression">7.1.2. Transforming target in regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/compose.html#featureunion-composite-feature-spaces">7.1.3. FeatureUnion: composite feature spaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/compose.html#columntransformer-for-heterogeneous-data">7.1.4. ColumnTransformer for heterogeneous data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/compose.html#visualizing-composite-estimators">7.1.5. Visualizing Composite Estimators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/feature_extraction.html">7.2. Feature extraction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/feature_extraction.html#loading-features-from-dicts">7.2.1. Loading features from dicts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/feature_extraction.html#feature-hashing">7.2.2. Feature hashing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction">7.2.3. Text feature extraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/feature_extraction.html#image-feature-extraction">7.2.4. Image feature extraction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/preprocessing.html">7.3. Preprocessing data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/preprocessing.html#standardization-or-mean-removal-and-variance-scaling">7.3.1. Standardization, or mean removal and variance scaling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/preprocessing.html#non-linear-transformation">7.3.2. Non-linear transformation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/preprocessing.html#normalization">7.3.3. Normalization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/preprocessing.html#encoding-categorical-features">7.3.4. Encoding categorical features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/preprocessing.html#discretization">7.3.5. Discretization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/preprocessing.html#imputation-of-missing-values">7.3.6. Imputation of missing values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/preprocessing.html#generating-polynomial-features">7.3.7. Generating polynomial features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/preprocessing.html#custom-transformers">7.3.8. Custom transformers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/impute.html">7.4. Imputation of missing values</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/impute.html#univariate-vs-multivariate-imputation">7.4.1. Univariate vs. Multivariate Imputation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/impute.html#univariate-feature-imputation">7.4.2. Univariate feature imputation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/impute.html#multivariate-feature-imputation">7.4.3. Multivariate feature imputation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/impute.html#nearest-neighbors-imputation">7.4.4. Nearest neighbors imputation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/impute.html#keeping-the-number-of-features-constant">7.4.5. Keeping the number of features constant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/impute.html#marking-imputed-values">7.4.6. Marking imputed values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/impute.html#estimators-that-handle-nan-values">7.4.7. Estimators that handle NaN values</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/unsupervised_reduction.html">7.5. Unsupervised dimensionality reduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/unsupervised_reduction.html#pca-principal-component-analysis">7.5.1. PCA: principal component analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/unsupervised_reduction.html#random-projections">7.5.2. Random projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/unsupervised_reduction.html#feature-agglomeration">7.5.3. Feature agglomeration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/random_projection.html">7.6. Random Projection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/random_projection.html#the-johnson-lindenstrauss-lemma">7.6.1. The Johnson-Lindenstrauss lemma</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/random_projection.html#gaussian-random-projection">7.6.2. Gaussian random projection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/random_projection.html#sparse-random-projection">7.6.3. Sparse random projection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/random_projection.html#inverse-transform">7.6.4. Inverse Transform</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/kernel_approximation.html">7.7. Kernel Approximation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/kernel_approximation.html#nystroem-method-for-kernel-approximation">7.7.1. Nystroem Method for Kernel Approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/kernel_approximation.html#radial-basis-function-kernel">7.7.2. Radial Basis Function Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/kernel_approximation.html#additive-chi-squared-kernel">7.7.3. Additive Chi Squared Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/kernel_approximation.html#skewed-chi-squared-kernel">7.7.4. Skewed Chi Squared Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/kernel_approximation.html#polynomial-kernel-approximation-via-tensor-sketch">7.7.5. Polynomial Kernel Approximation via Tensor Sketch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/kernel_approximation.html#mathematical-details">7.7.6. Mathematical Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/metrics.html">7.8. Pairwise metrics, Affinities and Kernels</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/metrics.html#cosine-similarity">7.8.1. Cosine similarity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/metrics.html#linear-kernel">7.8.2. Linear kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/metrics.html#polynomial-kernel">7.8.3. Polynomial kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/metrics.html#sigmoid-kernel">7.8.4. Sigmoid kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/metrics.html#rbf-kernel">7.8.5. RBF kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/metrics.html#laplacian-kernel">7.8.6. Laplacian kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/metrics.html#chi-squared-kernel">7.8.7. Chi-squared kernel</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/preprocessing_targets.html">7.9. Transforming the prediction target (<code class="docutils literal notranslate"><span class="pre">y</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/preprocessing_targets.html#label-binarization">7.9.1. Label binarization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/preprocessing_targets.html#label-encoding">7.9.2. Label encoding</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/datasets.html">8. Dataset loading utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/toy_dataset.html">8.1. Toy datasets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/toy_dataset.html#iris-plants-dataset">8.1.1. Iris plants dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset">8.1.2. Diabetes dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/toy_dataset.html#optical-recognition-of-handwritten-digits-dataset">8.1.3. Optical recognition of handwritten digits dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/toy_dataset.html#linnerrud-dataset">8.1.4. Linnerrud dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/toy_dataset.html#wine-recognition-dataset">8.1.5. Wine recognition dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/toy_dataset.html#breast-cancer-wisconsin-diagnostic-dataset">8.1.6. Breast cancer Wisconsin (diagnostic) dataset</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/real_world.html">8.2. Real world datasets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/real_world.html#the-olivetti-faces-dataset">8.2.1. The Olivetti faces dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/real_world.html#the-20-newsgroups-text-dataset">8.2.2. The 20 newsgroups text dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/real_world.html#the-labeled-faces-in-the-wild-face-recognition-dataset">8.2.3. The Labeled Faces in the Wild face recognition dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/real_world.html#forest-covertypes">8.2.4. Forest covertypes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/real_world.html#rcv1-dataset">8.2.5. RCV1 dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/real_world.html#kddcup-99-dataset">8.2.6. Kddcup 99 dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/real_world.html#california-housing-dataset">8.2.7. California Housing dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/real_world.html#species-distribution-dataset">8.2.8. Species distribution dataset</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/sample_generators.html">8.3. Generated datasets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/sample_generators.html#generators-for-classification-and-clustering">8.3.1. Generators for classification and clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/sample_generators.html#generators-for-regression">8.3.2. Generators for regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/sample_generators.html#generators-for-manifold-learning">8.3.3. Generators for manifold learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/sample_generators.html#generators-for-decomposition">8.3.4. Generators for decomposition</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/loading_other_datasets.html">8.4. Loading other datasets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/loading_other_datasets.html#sample-images">8.4.1. Sample images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/loading_other_datasets.html#datasets-in-svmlight-libsvm-format">8.4.2. Datasets in svmlight / libsvm format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/loading_other_datasets.html#downloading-datasets-from-the-openml-org-repository">8.4.3. Downloading datasets from the openml.org repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/datasets/loading_other_datasets.html#loading-from-external-datasets">8.4.4. Loading from external datasets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/computing.html">9. Computing with scikit-learn</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/computing/scaling_strategies.html">9.1. Strategies to scale computationally: bigger data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/computing/scaling_strategies.html#scaling-with-instances-using-out-of-core-learning">9.1.1. Scaling with instances using out-of-core learning</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/computing/computational_performance.html">9.2. Computational Performance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/computing/computational_performance.html#prediction-latency">9.2.1. Prediction Latency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/computing/computational_performance.html#prediction-throughput">9.2.2. Prediction Throughput</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/computing/computational_performance.html#tips-and-tricks">9.2.3. Tips and Tricks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/computing/parallelism.html">9.3. Parallelism, resource management, and configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/computing/parallelism.html#parallelism">9.3.1. Parallelism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/computing/parallelism.html#configuration-switches">9.3.2. Configuration switches</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/model_persistence.html">10. Model persistence</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/model_persistence.html#workflow-overview">10.1. Workflow Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/model_persistence.html#train-and-persist-the-model">10.1.1. Train and Persist the Model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/model_persistence.html#onnx">10.2. ONNX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/model_persistence.html#skops-io">10.3. <code class="docutils literal notranslate"><span class="pre">skops.io</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/model_persistence.html#pickle-joblib-and-cloudpickle">10.4. <code class="docutils literal notranslate"><span class="pre">pickle</span></code>, <code class="docutils literal notranslate"><span class="pre">joblib</span></code>, and <code class="docutils literal notranslate"><span class="pre">cloudpickle</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations">10.5. Security &amp; Maintainability Limitations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/model_persistence.html#replicating-the-training-environment-in-production">10.5.1. Replicating the training environment in production</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/model_persistence.html#serving-the-model-artifact">10.5.2. Serving the model artifact</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/model_persistence.html#summarizing-the-key-points">10.6. Summarizing the key points</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/common_pitfalls.html">11. Common pitfalls and recommended practices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/common_pitfalls.html#inconsistent-preprocessing">11.1. Inconsistent preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/common_pitfalls.html#data-leakage">11.2. Data leakage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/common_pitfalls.html#how-to-avoid-data-leakage">11.2.1. How to avoid data leakage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/common_pitfalls.html#data-leakage-during-pre-processing">11.2.2. Data leakage during pre-processing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/common_pitfalls.html#controlling-randomness">11.3. Controlling randomness</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/common_pitfalls.html#using-none-or-randomstate-instances-and-repeated-calls-to-fit-and-split">11.3.1. Using <code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">RandomState</span></code> instances, and repeated calls to <code class="docutils literal notranslate"><span class="pre">fit</span></code> and <code class="docutils literal notranslate"><span class="pre">split</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/common_pitfalls.html#common-pitfalls-and-subtleties">11.3.2. Common pitfalls and subtleties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/common_pitfalls.html#general-recommendations">11.3.3. General recommendations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/dispatching.html">12. Dispatching</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/modules/array_api.html">12.1. Array API support (experimental)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/array_api.html#enabling-array-api-support">12.1.1. Enabling array API support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/array_api.html#example-usage">12.1.2. Example usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/array_api.html#support-for-array-api-compatible-inputs">12.1.3. Support for <code class="docutils literal notranslate"><span class="pre">Array</span> <span class="pre">API</span></code>-compatible inputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/array_api.html#input-and-output-array-type-handling">12.1.4. Input and output array type handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://scikit-learn.org/stable/modules/array_api.html#common-estimator-checks">12.1.5. Common estimator checks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/machine_learning_map.html">13. Choosing the right estimator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://scikit-learn.org/stable/presentations.html">14. External Resources, Videos and Talks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/presentations.html#the-scikit-learn-mooc">14.1. The scikit-learn MOOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/presentations.html#videos">14.2. Videos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/presentations.html#new-to-scientific-python">14.3. New to Scientific Python?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://scikit-learn.org/stable/presentations.html#external-tutorials">14.4. External Tutorials</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev" href="https://scikit-learn.org/stable/install.html" title="previous page">
+      <svg class="svg-inline--fa fa-angle-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg><!-- <i class="fa-solid fa-angle-left"></i> Font Awesome fontawesome.com -->
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Installing scikit-learn</p>
+      </div>
+    </a>
+    <a class="right-next" href="https://scikit-learn.org/stable/supervised_learning.html" title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Supervised learning</p>
+      </div>
+      <svg class="svg-inline--fa fa-angle-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg><!-- <i class="fa-solid fa-angle-right"></i> Font Awesome fontawesome.com -->
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://scikit-learn.org/stable/_sources/user_guide.rst.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer="" src="./user_guide_files/bootstrap.js.download"></script>
+<script defer="" src="./user_guide_files/pydata-sphinx-theme.js.download"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2025, scikit-learn developers (BSD License).
+      <br>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  
+</body></html>

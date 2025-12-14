@@ -1,0 +1,13 @@
+Classification is a supervised learning technique where the model predicts discrete class labels.
+
+Binary classification involves two classes, such as spam vs not spam.
+Multi-class classification involves more than two classes.
+
+Logistic Regression is a linear model used for binary classification. It uses the sigmoid function to output probabilities.
+
+Decision Trees classify data by recursively splitting features based on conditions.
+
+Classification models are evaluated using metrics such as accuracy, precision, recall, and F1-score.
+Accuracy measures overall correctness.
+Precision measures correctness of positive predictions.
+Recall measures how many actual positives were correctly identified.
