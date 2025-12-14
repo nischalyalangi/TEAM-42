@@ -9,6 +9,7 @@ backend_controller.USER_PROFILE = {
 }
 
 # First explanation
+print("Calling tutor_step...")
 response = tutor_step()
 print("\n=== AI EXPLANATION ===")
 print(response["explanation"])
